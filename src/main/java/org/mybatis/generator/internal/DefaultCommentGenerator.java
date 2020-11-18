@@ -43,6 +43,7 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.MergeConstants;
 import org.mybatis.generator.config.PropertyRegistry;
 import org.mybatis.generator.internal.util.StringUtility;
+import org.mybatis.generator.linitly.RootClassConstant;
 import org.mybatis.generator.linitly.SwaggerConstant;
 
 public class DefaultCommentGenerator implements CommentGenerator {
@@ -183,13 +184,19 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        sb.append(" * This class corresponds to the database table "); //$NON-NLS-1$
 //        sb.append(introspectedTable.getFullyQualifiedTable());
         // Linitly
+        innerClass.addJavaDocLine("/**");
+        innerClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
+        innerClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
+        innerClass.addJavaDocLine(" * @description: ");
+        innerClass.addJavaDocLine(" */");
+
         sb.append(SwaggerConstant.ANNOTATIONS[0] + "(value = \"").append(introspectedTable.getFullyQualifiedTable().getRemark()).append("\")");
         // Linitly
         innerClass.addJavaDocLine(sb.toString());
 
         addJavadocTag(innerClass, false);
 
-        innerClass.addJavaDocLine(" */"); //$NON-NLS-1$
+//        innerClass.addJavaDocLine(" */"); //$NON-NLS-1$
     }
 
     @Override
@@ -206,13 +213,19 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        sb.append(" * This class corresponds to the database table "); //$NON-NLS-1$
 //        sb.append(introspectedTable.getFullyQualifiedTable());
         // Linitly
+        innerClass.addJavaDocLine("/**");
+        innerClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
+        innerClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
+        innerClass.addJavaDocLine(" * @description: ");
+        innerClass.addJavaDocLine(" */");
+
         sb.append(SwaggerConstant.ANNOTATIONS[0] + "(value = \"").append(introspectedTable.getFullyQualifiedTable().getRemark()).append("\")");
         // Linitly
         innerClass.addJavaDocLine(sb.toString());
 
         addJavadocTag(innerClass, markAsDoNotDelete);
 
-        innerClass.addJavaDocLine(" */"); //$NON-NLS-1$
+//        innerClass.addJavaDocLine(" */"); //$NON-NLS-1$
     }
 
     @Override
@@ -243,6 +256,12 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        topLevelClass.addJavaDocLine(" */"); //$NON-NLS-1$
         // Linitly
         StringBuilder sb = new StringBuilder();
+        topLevelClass.addJavaDocLine("/**");
+        topLevelClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
+        topLevelClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
+        topLevelClass.addJavaDocLine(" * @description: ");
+        topLevelClass.addJavaDocLine(" */");
+
         sb.append(SwaggerConstant.ANNOTATIONS[0] + "(value = \"").append(introspectedTable.getFullyQualifiedTable().getRemark()).append("\")");
         // Linitly
         topLevelClass.addJavaDocLine(sb.toString());
