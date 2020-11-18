@@ -355,7 +355,7 @@ public class Context extends PropertyHolder {
         //
         // 1. Create introspected table implementation
 
-        steps += tableConfigurations.size() * 1;
+        steps += tableConfigurations.size();
 
         return steps;
     }
@@ -448,6 +448,7 @@ public class Context extends PropertyHolder {
             List<String> warnings)
             throws InterruptedException {
 
+        // 此处循环基本无意义
         pluginAggregator = new PluginAggregator();
         for (PluginConfiguration pluginConfiguration : pluginConfigurations) {
             Plugin plugin = ObjectFactory.createPlugin(this,
@@ -465,6 +466,7 @@ public class Context extends PropertyHolder {
 
             introspectedTable.initialize();
             introspectedTable.calculateGenerators(warnings, callback);
+            // 此处计算需要生成的java文件
             generatedJavaFiles.addAll(introspectedTable
                     .getGeneratedJavaFiles());
             generatedXmlFiles.addAll(introspectedTable
@@ -480,6 +482,7 @@ public class Context extends PropertyHolder {
                     .contextGenerateAdditionalKotlinFiles(introspectedTable));
         }
 
+        // 此处一般无意义
         generatedJavaFiles.addAll(pluginAggregator
                 .contextGenerateAdditionalJavaFiles());
         generatedXmlFiles.addAll(pluginAggregator

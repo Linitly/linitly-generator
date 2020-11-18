@@ -207,6 +207,7 @@ public class MyBatisGenerator {
      * @throws InterruptedException
      *             if the method is canceled through the ProgressCallback
      */
+    // 一般我们使用的情况，前三个参数都为空，最后一个为true
     public void generate(ProgressCallback callback, Set<String> contextIds,
             Set<String> fullyQualifiedTableNames, boolean writeFiles) throws SQLException,
             IOException, InterruptedException {
@@ -221,6 +222,7 @@ public class MyBatisGenerator {
         RootClassInfo.reset();
 
         // calculate the contexts to run
+        // 此处一般contextsToRun = configuration.getContexts();
         List<Context> contextsToRun;
         if (contextIds == null || contextIds.isEmpty()) {
             contextsToRun = configuration.getContexts();
@@ -234,12 +236,14 @@ public class MyBatisGenerator {
         }
 
         // setup custom classloader if required
+        // 获取数据库驱动的类加载器
         if (!configuration.getClassPathEntries().isEmpty()) {
             ClassLoader classLoader = getCustomClassloader(configuration.getClassPathEntries());
             ObjectFactory.addExternalClassLoader(classLoader);
         }
 
         // now run the introspections...
+        // 获取数据库表信息，放入context
         int totalSteps = 0;
         for (Context context : contextsToRun) {
             totalSteps += context.getIntrospectionSteps();
@@ -252,18 +256,21 @@ public class MyBatisGenerator {
         }
 
         // now run the generates
+        // totalSteps基本无意义
         totalSteps = 0;
         for (Context context : contextsToRun) {
             totalSteps += context.getGenerationSteps();
         }
         callback.generationStarted(totalSteps);
 
+        // 循环获取要生成的文件信息(其实是根据table数量循环的)
         for (Context context : contextsToRun) {
             context.generateFiles(callback, generatedJavaFiles,
                     generatedXmlFiles, generatedKotlinFiles, warnings);
         }
 
         // now save the files
+        // 此处为IO写文件
         if (writeFiles) {
             callback.saveStarted(generatedXmlFiles.size()
                     + generatedJavaFiles.size());
@@ -300,6 +307,7 @@ public class MyBatisGenerator {
                     .getTargetProject(), gjf.getTargetPackage());
             targetFile = new File(directory, gjf.getFileName());
             if (targetFile.exists()) {
+                // getFormattedContent为获取文件最终内容
                 if (shellCallback.isMergeSupported()) {
                     source = shellCallback.mergeJavaFile(gjf
                             .getFormattedContent(), targetFile,

@@ -33,7 +33,9 @@ public class InnerClassRenderer {
         lines.add(renderFirstLine(innerClass, compilationUnit));
         lines.addAll(RenderingUtilities.renderFields(innerClass.getFields(), compilationUnit));
         lines.addAll(RenderingUtilities.renderInitializationBlocks(innerClass.getInitializationBlocks()));
-        lines.addAll(RenderingUtilities.renderClassOrEnumMethods(innerClass.getMethods(), compilationUnit));
+        // Linitly
+//        lines.addAll(RenderingUtilities.renderClassOrEnumMethods(innerClass.getMethods(), compilationUnit));
+        // Linitly
         lines.addAll(RenderingUtilities.renderInnerClasses(innerClass.getInnerClasses(), compilationUnit));
         lines.addAll(RenderingUtilities.renderInnerInterfaces(innerClass.getInnerInterfaces(), compilationUnit));
         lines.addAll(RenderingUtilities.renderInnerEnums(innerClass.getInnerEnums(), compilationUnit));

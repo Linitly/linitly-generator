@@ -17,11 +17,7 @@ package org.mybatis.generator.api.dom.java.render;
 
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,6 +32,8 @@ import org.mybatis.generator.api.dom.java.InnerInterface;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TypeParameter;
 import org.mybatis.generator.internal.util.CustomCollectors;
+import org.mybatis.generator.linitly.LombokConstant;
+import org.mybatis.generator.linitly.SwaggerConstant;
 
 public class RenderingUtilities {
     private RenderingUtilities() {}
@@ -170,10 +168,14 @@ public class RenderingUtilities {
 
     public static List<String> renderImports(CompilationUnit compilationUnit) {
         Set<String> imports = renderImports(compilationUnit.getImportedTypes());
+        // Linitly
+        imports.addAll(new HashSet<>(Arrays.asList(LombokConstant.IMPORTS)));
+        imports.addAll(new HashSet<>(Arrays.asList(SwaggerConstant.IMPORTS)));
+        // Linitly
 
-        if (imports.isEmpty()) {
-            return Collections.emptyList();
-        }
+//        if (imports.isEmpty()) {
+//            return Collections.emptyList();
+//        }
 
         return addEmptyLine(imports.stream()).collect(Collectors.toList());
     }

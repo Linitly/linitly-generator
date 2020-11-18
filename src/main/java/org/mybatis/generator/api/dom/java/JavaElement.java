@@ -55,6 +55,12 @@ public abstract class JavaElement {
         annotations.add(annotation);
     }
 
+    // Linitly
+    public void addAllAnnotation(List<String> annos) {
+        annotations.addAll(annos);
+    }
+    // Linitly
+
     public JavaVisibility getVisibility() {
         return visibility;
     }

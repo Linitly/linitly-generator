@@ -20,14 +20,12 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.internal.ObjectFactory;
+import org.mybatis.generator.linitly.RootClassConstant;
 
 /**
  * Holds information about a class (uses the JavaBeans Introspector to find properties).
@@ -84,12 +82,23 @@ public class RootClassInfo {
             BeanInfo bi = Introspector.getBeanInfo(clazz);
             propertyDescriptors = bi.getPropertyDescriptors();
         } catch (Exception e) {
+            // Linitly
+            if (className.equals(RootClassConstant.FULL_CLASS_NAME)) {
+                return;
+            }
+            // Linitly
             propertyDescriptors = null;
             warnings.add(getString("Warning.20", className)); //$NON-NLS-1$
         }
     }
 
     public boolean containsProperty(IntrospectedColumn introspectedColumn) {
+        // Linitly 判断是否有字段，相同字段返回true
+        if (Arrays.asList(RootClassConstant.FIELD_NAME).contains(introspectedColumn.getActualColumnName())) {
+            return true;
+        }
+        // Linitly
+
         if (propertyDescriptors == null) {
             return false;
         }
