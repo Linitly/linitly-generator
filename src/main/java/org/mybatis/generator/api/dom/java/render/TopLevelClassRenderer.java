@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.linitly.LombokConstant;
-import org.mybatis.generator.linitly.SwaggerConstant;
 
 public class TopLevelClassRenderer {
 
@@ -40,7 +39,6 @@ public class TopLevelClassRenderer {
         lines.addAll(renderImports(topLevelClass));
         // Linitly
         topLevelClass.addAllAnnotation(Arrays.asList(LombokConstant.ANNOTATIONS));
-        topLevelClass.addAnnotation(SwaggerConstant.ANNOTATIONS[0]);
         // Linitly
         lines.addAll(renderInnerClassNoIndent(topLevelClass, topLevelClass));
 

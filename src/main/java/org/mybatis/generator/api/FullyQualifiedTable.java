@@ -42,6 +42,9 @@ public class FullyQualifiedTable {
     private String beginningDelimiter;
     private String endingDelimiter;
     private DomainObjectRenamingRule domainObjectRenamingRule;
+    // Linitly
+    private String remark;
+    // Linitly
 
     /**
      * This object is used to hold information related to the table itself, not the columns in the
@@ -322,5 +325,13 @@ public class FullyQualifiedTable {
 
     public String getDomainObjectSubPackage() {
         return domainObjectSubPackage;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

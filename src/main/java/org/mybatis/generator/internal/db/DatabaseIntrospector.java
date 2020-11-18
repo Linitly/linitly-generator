@@ -22,10 +22,7 @@ import static org.mybatis.generator.internal.util.StringUtility.stringContainsSp
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -590,7 +587,7 @@ public class DatabaseIntrospector {
 
     private List<IntrospectedTable> calculateIntrospectedTables(
             TableConfiguration tc,
-            Map<ActualTableName, List<IntrospectedColumn>> columns) {
+            Map<ActualTableName, List<IntrospectedColumn>> columns) throws SQLException {
         boolean delimitIdentifiers = tc.isDelimitIdentifiers()
                 || stringContainsSpace(tc.getCatalog())
                 || stringContainsSpace(tc.getSchema())
@@ -622,6 +619,16 @@ public class DatabaseIntrospector {
                     delimitIdentifiers,
                     tc.getDomainObjectRenamingRule(),
                     context);
+
+            // Linitly
+            Statement stmt = databaseMetaData.getConnection().createStatement();
+            ResultSet resultSet = stmt.executeQuery("SHOW TABLE STATUS LIKE '" + atn.getTableName() + "'");
+            while (resultSet.next()) {
+                table.setRemark(resultSet.getString("COMMENT"));
+            }
+            closeResultSet(resultSet);
+            stmt.close();
+            // Linitly
 
             IntrospectedTable introspectedTable = ObjectFactory
                     .createIntrospectedTable(tc, table, context);
