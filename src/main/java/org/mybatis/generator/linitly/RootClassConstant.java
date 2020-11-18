@@ -14,5 +14,5 @@ public interface RootClassConstant {
 
     String AUTHOR = "linitly-generator";
 
-    SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+    SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 }
