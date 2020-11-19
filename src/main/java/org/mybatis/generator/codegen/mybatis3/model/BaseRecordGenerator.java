@@ -20,9 +20,7 @@ import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaBeansGett
 import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaBeansSetter;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.FullyQualifiedTable;
@@ -37,6 +35,8 @@ import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.RootClassInfo;
+import org.mybatis.generator.linitly.LombokConstant;
+import org.mybatis.generator.linitly.SwaggerConstant;
 
 public class BaseRecordGenerator extends AbstractJavaGenerator {
 
@@ -57,6 +57,11 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
+
+        Set<FullyQualifiedJavaType> importedTypes = new TreeSet<>();
+        Arrays.asList(LombokConstant.IMPORTS).forEach(e -> importedTypes.add(new FullyQualifiedJavaType(e)));
+        Arrays.asList(SwaggerConstant.IMPORTS).forEach(e -> importedTypes.add(new FullyQualifiedJavaType(e)));
+        topLevelClass.addImportedTypes(importedTypes);
 
         FullyQualifiedJavaType superClass = getSuperClass();
         if (superClass != null) {

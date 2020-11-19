@@ -31,6 +31,7 @@ public class InnerInterfaceRenderer {
         lines.addAll(innerInterface.getJavaDocLines());
         lines.addAll(innerInterface.getAnnotations());
         lines.add(renderFirstLine(innerInterface, compilationUnit));
+        lines.add("");
         lines.addAll(RenderingUtilities.renderFields(innerInterface.getFields(), compilationUnit));
         lines.addAll(RenderingUtilities.renderInterfaceMethods(innerInterface.getMethods(), compilationUnit));
         lines.addAll(RenderingUtilities.renderInnerClasses(innerInterface.getInnerClasses(), compilationUnit));

@@ -32,7 +32,7 @@ import org.mybatis.generator.internal.util.StringUtility;
 public class AnnotatedSelectAllMethodGenerator extends SelectAllMethodGenerator {
 
     public AnnotatedSelectAllMethodGenerator() {
-        super();
+        super(false);
     }
 
     @Override

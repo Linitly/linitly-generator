@@ -43,6 +43,7 @@ import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.UpdateByExample
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.UpdateByPrimaryKeySelectiveElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.UpdateByPrimaryKeyWithBLOBsElementGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.UpdateByPrimaryKeyWithoutBLOBsElementGenerator;
+import org.mybatis.generator.linitly.FindAllElementGenerator;
 
 public class XMLMapperGenerator extends AbstractXmlGenerator {
 
@@ -62,27 +63,34 @@ public class XMLMapperGenerator extends AbstractXmlGenerator {
         context.getCommentGenerator().addRootComment(answer);
 
         addResultMapWithoutBLOBsElement(answer);
-        addResultMapWithBLOBsElement(answer);
-        addExampleWhereClauseElement(answer);
-        addMyBatis3UpdateByExampleWhereClauseElement(answer);
+//        addResultMapWithBLOBsElement(answer);
+//        addExampleWhereClauseElement(answer);
+//        addMyBatis3UpdateByExampleWhereClauseElement(answer);
         addBaseColumnListElement(answer);
-        addBlobColumnListElement(answer);
-        addSelectByExampleWithBLOBsElement(answer);
-        addSelectByExampleWithoutBLOBsElement(answer);
+//        addBlobColumnListElement(answer);
+//        addSelectByExampleWithBLOBsElement(answer);
+//        addSelectByExampleWithoutBLOBsElement(answer);
         addSelectByPrimaryKeyElement(answer);
         addDeleteByPrimaryKeyElement(answer);
-        addDeleteByExampleElement(answer);
+//        addDeleteByExampleElement(answer);
         addInsertElement(answer);
-        addInsertSelectiveElement(answer);
-        addCountByExampleElement(answer);
-        addUpdateByExampleSelectiveElement(answer);
-        addUpdateByExampleWithBLOBsElement(answer);
-        addUpdateByExampleWithoutBLOBsElement(answer);
-        addUpdateByPrimaryKeySelectiveElement(answer);
+//        addInsertSelectiveElement(answer);
+//        addCountByExampleElement(answer);
+//        addUpdateByExampleSelectiveElement(answer);
+//        addUpdateByExampleWithBLOBsElement(answer);
+//        addUpdateByExampleWithoutBLOBsElement(answer);
+//        addUpdateByPrimaryKeySelectiveElement(answer);
         addUpdateByPrimaryKeyWithBLOBsElement(answer);
         addUpdateByPrimaryKeyWithoutBLOBsElement(answer);
 
+        addFindAllElement(answer);
+
         return answer;
+    }
+
+    protected void addFindAllElement(XmlElement parentElement) {
+        AbstractXmlElementGenerator elementGenerator = new FindAllElementGenerator(false);
+        initializeAndExecuteGenerator(elementGenerator, parentElement);
     }
 
     protected void addResultMapWithoutBLOBsElement(XmlElement parentElement) {

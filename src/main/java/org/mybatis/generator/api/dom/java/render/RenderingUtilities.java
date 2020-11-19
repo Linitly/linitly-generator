@@ -168,14 +168,9 @@ public class RenderingUtilities {
 
     public static List<String> renderImports(CompilationUnit compilationUnit) {
         Set<String> imports = renderImports(compilationUnit.getImportedTypes());
-        // Linitly
-        imports.addAll(new HashSet<>(Arrays.asList(LombokConstant.IMPORTS)));
-        imports.addAll(new HashSet<>(Arrays.asList(SwaggerConstant.IMPORTS)));
-        // Linitly
-
-//        if (imports.isEmpty()) {
-//            return Collections.emptyList();
-//        }
+        if (imports.isEmpty()) {
+            return Collections.emptyList();
+        }
 
         return addEmptyLine(imports.stream()).collect(Collectors.toList());
     }

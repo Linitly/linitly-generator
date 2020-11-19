@@ -31,6 +31,7 @@ public class InnerClassRenderer {
         lines.addAll(innerClass.getJavaDocLines());
         lines.addAll(innerClass.getAnnotations());
         lines.add(renderFirstLine(innerClass, compilationUnit));
+        lines.add("");
         lines.addAll(RenderingUtilities.renderFields(innerClass.getFields(), compilationUnit));
         lines.addAll(RenderingUtilities.renderInitializationBlocks(innerClass.getInitializationBlocks()));
         // Linitly

@@ -115,7 +115,7 @@ public class SimpleJavaClientGenerator extends AbstractJavaClientGenerator {
     }
 
     protected void addSelectAllMethod(Interface interfaze) {
-        AbstractJavaMapperMethodGenerator methodGenerator = new SelectAllMethodGenerator();
+        AbstractJavaMapperMethodGenerator methodGenerator = new SelectAllMethodGenerator(false);
         initializeAndExecuteGenerator(methodGenerator, interfaze);
     }
 

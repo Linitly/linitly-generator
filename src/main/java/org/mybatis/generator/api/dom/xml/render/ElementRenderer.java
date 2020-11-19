@@ -80,12 +80,13 @@ public class ElementRenderer implements ElementVisitor<Stream<String>> {
     }
 
     private String indent(String s) {
-        return "  " + s; //$NON-NLS-1$
+        return "    " + s; //$NON-NLS-1$
     }
 
     private Stream<String> renderClose(XmlElement element) {
         return Stream.of("</" //$NON-NLS-1$
                 + element.getName()
-                + ">"); //$NON-NLS-1$
+                + ">"
+                + (element.getName().equals("if") || element.getName().equals("where") ? "" : "\n")); //$NON-NLS-1$
     }
 }

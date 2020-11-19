@@ -469,6 +469,7 @@ public class Context extends PropertyHolder {
             // 此处计算需要生成的java文件
             generatedJavaFiles.addAll(introspectedTable
                     .getGeneratedJavaFiles());
+            // 此处计算需要生成的xml文件
             generatedXmlFiles.addAll(introspectedTable
                     .getGeneratedXmlFiles());
             generatedKotlinFiles.addAll(introspectedTable
