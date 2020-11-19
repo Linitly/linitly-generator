@@ -65,6 +65,10 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
             ProgressCallback progressCallback) {
         calculateJavaModelGenerators(warnings, progressCallback);
 
+//        calculateJavaControllerGenerators(warnings, progressCallback);
+
+
+
         AbstractJavaClientGenerator javaClientGenerator =
                 calculateClientGenerators(warnings, progressCallback);
 
