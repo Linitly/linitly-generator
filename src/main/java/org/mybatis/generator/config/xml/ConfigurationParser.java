@@ -136,9 +136,10 @@ public class ConfigurationParser {
                 }
             }
 
-            if (document == null || !parseErrors.isEmpty()) {
+            if (document == null) {
                 throw new XMLParserException(parseErrors);
             }
+            parseErrors.clear();
 
             Configuration config;
             Element rootNode = document.getDocumentElement();

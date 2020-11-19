@@ -49,6 +49,8 @@ import org.mybatis.generator.config.SqlMapGeneratorConfiguration;
 import org.mybatis.generator.config.TableConfiguration;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.ObjectFactory;
+import org.mybatis.generator.linitly.controller.JavaControllerGeneratorConfiguration;
+import org.mybatis.generator.linitly.service.JavaServiceGeneratorConfiguration;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -194,6 +196,10 @@ public class MyBatisGeneratorConfigurationParser {
                 parseJavaClientGenerator(context, childNode);
             } else if ("table".equals(childNode.getNodeName())) { //$NON-NLS-1$
                 parseTable(context, childNode);
+            } else if ("javaControllerGenerator".equals(childNode.getNodeName())) {
+                parseJavaControllerGenerator(context, childNode);
+            } else if ("javaServiceGenerator".equals(childNode.getNodeName())) {
+                parseJavaServiceGenerator(context, childNode);
             }
         }
     }
@@ -582,8 +588,7 @@ public class MyBatisGeneratorConfigurationParser {
     protected void parseJavaModelGenerator(Context context, Node node) {
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
 
-        context
-                .setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
+        context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         Properties attributes = parseAttributes(node);
         String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
@@ -604,6 +609,30 @@ public class MyBatisGeneratorConfigurationParser {
                 parseProperty(javaModelGeneratorConfiguration, childNode);
             }
         }
+    }
+
+    private void parseJavaControllerGenerator(Context context, Node node) {
+        JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration = new JavaControllerGeneratorConfiguration();
+
+        context.setJavaControllerGeneratorConfiguration(javaControllerGeneratorConfiguration);
+        Properties attributes = parseAttributes(node);
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+
+        javaControllerGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaControllerGeneratorConfiguration.setTargetProject(targetProject);
+    }
+
+    private void parseJavaServiceGenerator(Context context, Node node) {
+        JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration = new JavaServiceGeneratorConfiguration();
+
+        context.setJavaServiceGeneratorConfiguration(javaServiceGeneratorConfiguration);
+        Properties attributes = parseAttributes(node);
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+
+        javaServiceGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaServiceGeneratorConfiguration.setTargetProject(targetProject);
     }
 
     private void parseJavaClientGenerator(Context context, Node node) {

@@ -42,6 +42,8 @@ import org.mybatis.generator.internal.JDBCConnectionFactory;
 import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.internal.PluginAggregator;
 import org.mybatis.generator.internal.db.DatabaseIntrospector;
+import org.mybatis.generator.linitly.controller.JavaControllerGeneratorConfiguration;
+import org.mybatis.generator.linitly.service.JavaServiceGeneratorConfiguration;
 
 public class Context extends PropertyHolder {
 
@@ -58,6 +60,10 @@ public class Context extends PropertyHolder {
     private JavaModelGeneratorConfiguration javaModelGeneratorConfiguration;
 
     private JavaClientGeneratorConfiguration javaClientGeneratorConfiguration;
+
+    private JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration;
+
+    private JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration;
 
     private ArrayList<TableConfiguration> tableConfigurations;
 
@@ -116,6 +122,22 @@ public class Context extends PropertyHolder {
 
     public JavaModelGeneratorConfiguration getJavaModelGeneratorConfiguration() {
         return javaModelGeneratorConfiguration;
+    }
+
+    public JavaControllerGeneratorConfiguration getJavaControllerGeneratorConfiguration() {
+        return javaControllerGeneratorConfiguration;
+    }
+
+    public void setJavaControllerGeneratorConfiguration(JavaControllerGeneratorConfiguration javaControllerGeneratorConfiguration) {
+        this.javaControllerGeneratorConfiguration = javaControllerGeneratorConfiguration;
+    }
+
+    public JavaServiceGeneratorConfiguration getJavaServiceGeneratorConfiguration() {
+        return javaServiceGeneratorConfiguration;
+    }
+
+    public void setJavaServiceGeneratorConfiguration(JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration) {
+        this.javaServiceGeneratorConfiguration = javaServiceGeneratorConfiguration;
     }
 
     public JavaTypeResolverConfiguration getJavaTypeResolverConfiguration() {
