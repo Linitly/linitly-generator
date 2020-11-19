@@ -130,12 +130,12 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
 
     protected void calculateJavaModelGenerators(List<String> warnings,
             ProgressCallback progressCallback) {
-        if (getRules().generateExampleClass()) {
-            AbstractJavaGenerator javaGenerator = new ExampleGenerator(getExampleProject());
-            initializeAbstractGenerator(javaGenerator, warnings,
-                    progressCallback);
-            javaGenerators.add(javaGenerator);
-        }
+//        if (getRules().generateExampleClass()) {
+//            AbstractJavaGenerator javaGenerator = new ExampleGenerator(getExampleProject());
+//            initializeAbstractGenerator(javaGenerator, warnings,
+//                    progressCallback);
+//            javaGenerators.add(javaGenerator);
+//        }
 
         if (getRules().generatePrimaryKeyClass()) {
             AbstractJavaGenerator javaGenerator = new PrimaryKeyGenerator(getModelProject());
