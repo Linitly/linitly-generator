@@ -2,7 +2,7 @@ package org.mybatis.generator.linitly;
 
 public interface MapperConstant {
 
-    String EXTENDS_VALUE = "org.linitly.boot.base.dao.BaseBeanMapper.BaseEntityMap";
+    String EXTENDS_VALUE = CommonConstant.BASE_PACKAGE + ".dao.BaseBeanMapper.BaseEntityMap";
 
     String PARAM_ANNOTATION = "@Param";
 

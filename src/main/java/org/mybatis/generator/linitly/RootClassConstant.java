@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public interface RootClassConstant {
 
-    String CLASS_PACKAGE = "org.linitly.boot.business.helper.entity";
+    String CLASS_PACKAGE = CommonConstant.BUSINESS_PACKAGE + ".helper.entity";
 
     String CLASS_NAME = "BaseEntity";
 
