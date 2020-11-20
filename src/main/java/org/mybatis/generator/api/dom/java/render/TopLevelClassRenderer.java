@@ -37,9 +37,6 @@ public class TopLevelClassRenderer {
         lines.addAll(renderPackage(topLevelClass));
         lines.addAll(renderStaticImports(topLevelClass));
         lines.addAll(renderImports(topLevelClass));
-        // Linitly
-        topLevelClass.addAllAnnotation(Arrays.asList(LombokConstant.ANNOTATIONS));
-        // Linitly
         lines.addAll(renderInnerClassNoIndent(topLevelClass, topLevelClass));
 
         return lines.stream()

@@ -31,6 +31,8 @@ public class FullyQualifiedJavaType implements
 
     private static FullyQualifiedJavaType stringInstance = null;
 
+    private static FullyQualifiedJavaType longInstance = null;
+
     private static FullyQualifiedJavaType booleanPrimitiveInstance = null;
 
     private static FullyQualifiedJavaType objectInstance = null;
@@ -282,6 +284,13 @@ public class FullyQualifiedJavaType implements
         }
 
         return stringInstance;
+    }
+
+    public static FullyQualifiedJavaType getLongInstance() {
+        if (longInstance == null) {
+            longInstance = new FullyQualifiedJavaType("java.lang.Long"); //$NON-NLS-1$
+        }
+        return longInstance;
     }
 
     public static final FullyQualifiedJavaType getBooleanPrimitiveInstance() {

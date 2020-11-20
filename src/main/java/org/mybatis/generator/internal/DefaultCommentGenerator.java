@@ -190,7 +190,7 @@ public class DefaultCommentGenerator implements CommentGenerator {
         innerClass.addJavaDocLine(" * @description: ");
         innerClass.addJavaDocLine(" */");
 
-        sb.append(SwaggerConstant.ANNOTATIONS[0] + "(value = \"").append(introspectedTable.getFullyQualifiedTable().getRemark()).append("\")");
+//        sb.append(SwaggerConstant.ANNOTATIONS[0] + "(value = \"").append(introspectedTable.getFullyQualifiedTable().getRemark()).append("\")");
         // Linitly
         innerClass.addJavaDocLine(sb.toString());
 
@@ -219,7 +219,7 @@ public class DefaultCommentGenerator implements CommentGenerator {
         innerClass.addJavaDocLine(" * @description: ");
         innerClass.addJavaDocLine(" */");
 
-        sb.append(SwaggerConstant.ANNOTATIONS[0] + "(value = \"").append(introspectedTable.getFullyQualifiedTable().getRemark()).append("\")");
+//        sb.append(SwaggerConstant.ANNOTATIONS[0] + "(value = \"").append(introspectedTable.getFullyQualifiedTable().getRemark()).append("\")");
         // Linitly
         innerClass.addJavaDocLine(sb.toString());
 
@@ -261,8 +261,6 @@ public class DefaultCommentGenerator implements CommentGenerator {
         topLevelClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
         topLevelClass.addJavaDocLine(" * @description: ");
         topLevelClass.addJavaDocLine(" */");
-
-        sb.append(SwaggerConstant.ANNOTATIONS[0] + "(value = \"").append(introspectedTable.getFullyQualifiedTable().getRemark()).append("\")");
         // Linitly
         topLevelClass.addJavaDocLine(sb.toString());
     }
@@ -320,7 +318,7 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        field.addJavaDocLine(" */"); //$NON-NLS-1$
         // Linitly
         String remarks = introspectedColumn.getRemarks();
-        String javaDoc = SwaggerConstant.ANNOTATIONS[1] + "(value = \"" + remarks + "\")";
+        String javaDoc = SwaggerConstant.API_MODEL_PROPERTY + "(value = \"" + remarks + "\")";
         field.addJavaDocLine(javaDoc);
         // Linitly
     }
@@ -478,8 +476,8 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //                }
 //                field.addJavaDocLine(" */"); //$NON-NLS-1$
                 // Linitly
-                String javaDoc = SwaggerConstant.ANNOTATIONS[1] + "(value = \"" + remarks + "\")";
-                field.addJavaDocLine(javaDoc);
+//                String javaDoc = SwaggerConstant.ANNOTATIONS[1] + "(value = \"" + remarks + "\")";
+//                field.addJavaDocLine(javaDoc);
                 // Linitly
             }
         }

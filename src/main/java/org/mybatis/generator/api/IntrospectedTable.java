@@ -43,6 +43,8 @@ import org.mybatis.generator.internal.rules.ConditionalModelRules;
 import org.mybatis.generator.internal.rules.FlatModelRules;
 import org.mybatis.generator.internal.rules.HierarchicalModelRules;
 import org.mybatis.generator.internal.rules.Rules;
+import org.mybatis.generator.linitly.controller.JavaControllerGeneratorConfiguration;
+import org.mybatis.generator.linitly.service.JavaServiceGeneratorConfiguration;
 
 /**
  * Base class for all code generator implementations. This class provides many
@@ -64,6 +66,8 @@ public abstract class IntrospectedTable {
         ATTR_BASE_RECORD_TYPE,
         ATTR_RECORD_WITH_BLOBS_TYPE,
         ATTR_EXAMPLE_TYPE,
+        ATTR_JAVA_CONTROLLER_TYPE,
+        ATTR_JAVA_SERVICE_TYPE,
         ATTR_MYBATIS3_XML_MAPPER_PACKAGE,
         ATTR_MYBATIS3_XML_MAPPER_FILE_NAME,
         /** also used as XML Mapper namespace if a Java mapper is generated. */
@@ -722,7 +726,19 @@ public abstract class IntrospectedTable {
         return sb.toString();
     }
 
-    protected void calculateModelAttributes() {
+    private String calculateJavaServicePackage() {
+        JavaServiceGeneratorConfiguration config = context.getJavaServiceGeneratorConfiguration();
+
+        return config.getTargetPackage();
+    }
+
+    private String calculateJavaControllerPackage() {
+        JavaControllerGeneratorConfiguration config = context.getJavaControllerGeneratorConfiguration();
+
+        return config.getTargetPackage();
+    }
+
+  protected void calculateModelAttributes() {
         String pakkage = calculateJavaModelPackage();
 
         StringBuilder sb = new StringBuilder();
@@ -759,6 +775,30 @@ public abstract class IntrospectedTable {
         sb.append(fullyQualifiedTable.getDomainObjectName());
         sb.append("Example"); //$NON-NLS-1$
         setExampleType(sb.toString());
+    }
+
+    private void calculateJavaServiceAttributes() {
+        String packageName = calculateJavaServicePackage();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(packageName);
+        sb.append('.');
+        sb.append(fullyQualifiedTable.getDomainObjectName());
+        sb.append("Service");
+
+        setJavaServiceType(sb.toString());
+    }
+
+    private void calculateJavaControllerAttributes() {
+        String packageName = calculateJavaControllerPackage();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(packageName);
+        sb.append('.');
+        sb.append(fullyQualifiedTable.getDomainObjectName());
+        sb.append("Controller");
+
+        setJavaControllerType(sb.toString());
     }
 
     /**
@@ -991,6 +1031,22 @@ public abstract class IntrospectedTable {
         internalAttributes.put(
                 InternalAttribute.ATTR_MYBATIS3_JAVA_MAPPER_TYPE,
                 mybatis3JavaMapperType);
+    }
+
+    public String getJavaControllerType() {
+        return internalAttributes.get(InternalAttribute.ATTR_JAVA_CONTROLLER_TYPE);
+    }
+
+    public void setJavaControllerType(String javaControllerType) {
+        internalAttributes.put(InternalAttribute.ATTR_JAVA_CONTROLLER_TYPE, javaControllerType);
+    }
+
+    public String getJavaServiceType() {
+        return internalAttributes.get(InternalAttribute.ATTR_JAVA_SERVICE_TYPE);
+    }
+
+    public void setJavaServiceType(String javaServiceType) {
+        internalAttributes.put(InternalAttribute.ATTR_JAVA_SERVICE_TYPE, javaServiceType);
     }
 
     public String getMyBatis3SqlProviderType() {

@@ -486,12 +486,14 @@ public class Context extends PropertyHolder {
         for (IntrospectedTable introspectedTable : introspectedTables) {
             callback.checkCancel();
 
+            // 此处初始化属性
             introspectedTable.initialize();
+            // 此处计算需要生成生成器
             introspectedTable.calculateGenerators(warnings, callback);
-            // 此处计算需要生成的java文件
+            // 将java生成器添加到生成的java文件属性中
             generatedJavaFiles.addAll(introspectedTable
                     .getGeneratedJavaFiles());
-            // 此处计算需要生成的xml文件
+            // 将xml生成器添加到生成的xml文件属性中
             generatedXmlFiles.addAll(introspectedTable
                     .getGeneratedXmlFiles());
             generatedKotlinFiles.addAll(introspectedTable

@@ -59,9 +59,15 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
         commentGenerator.addJavaFileComment(topLevelClass);
 
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<>();
+        // 修改
         Arrays.asList(LombokConstant.IMPORTS).forEach(e -> importedTypes.add(new FullyQualifiedJavaType(e)));
-        Arrays.asList(SwaggerConstant.IMPORTS).forEach(e -> importedTypes.add(new FullyQualifiedJavaType(e)));
+
+        importedTypes.add(new FullyQualifiedJavaType(SwaggerConstant.API_MODEL_IMPORT));
+        importedTypes.add(new FullyQualifiedJavaType(SwaggerConstant.API_MODEL_PROPERTY_IMPORT));
         topLevelClass.addImportedTypes(importedTypes);
+
+        topLevelClass.addAllAnnotation(Arrays.asList(LombokConstant.ANNOTATIONS));
+        topLevelClass.addAnnotation(SwaggerConstant.API_MODEL + "(value = \"" + table.getRemark() + "\")");
 
         FullyQualifiedJavaType superClass = getSuperClass();
         if (superClass != null) {
@@ -99,21 +105,21 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
                 topLevelClass.addImportedType(field.getType());
             }
 
-            Method method = getJavaBeansGetter(introspectedColumn, context, introspectedTable);
-            if (plugins.modelGetterMethodGenerated(method, topLevelClass,
-                    introspectedColumn, introspectedTable,
-                    Plugin.ModelClassType.BASE_RECORD)) {
-                topLevelClass.addMethod(method);
-            }
-
-            if (!introspectedTable.isImmutable()) {
-                method = getJavaBeansSetter(introspectedColumn, context, introspectedTable);
-                if (plugins.modelSetterMethodGenerated(method, topLevelClass,
-                        introspectedColumn, introspectedTable,
-                        Plugin.ModelClassType.BASE_RECORD)) {
-                    topLevelClass.addMethod(method);
-                }
-            }
+//            Method method = getJavaBeansGetter(introspectedColumn, context, introspectedTable);
+//            if (plugins.modelGetterMethodGenerated(method, topLevelClass,
+//                    introspectedColumn, introspectedTable,
+//                    Plugin.ModelClassType.BASE_RECORD)) {
+//                topLevelClass.addMethod(method);
+//            }
+//
+//            if (!introspectedTable.isImmutable()) {
+//                method = getJavaBeansSetter(introspectedColumn, context, introspectedTable);
+//                if (plugins.modelSetterMethodGenerated(method, topLevelClass,
+//                        introspectedColumn, introspectedTable,
+//                        Plugin.ModelClassType.BASE_RECORD)) {
+//                    topLevelClass.addMethod(method);
+//                }
+//            }
         }
 
         List<CompilationUnit> answer = new ArrayList<>();

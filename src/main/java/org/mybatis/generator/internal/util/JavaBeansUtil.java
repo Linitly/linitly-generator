@@ -31,6 +31,8 @@ import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.config.Context;
 import org.mybatis.generator.config.PropertyRegistry;
 import org.mybatis.generator.config.TableConfiguration;
+import org.mybatis.generator.linitly.CommonConstant;
+import org.mybatis.generator.linitly.CommonUtil;
 
 public class JavaBeansUtil {
 
@@ -238,6 +240,24 @@ public class JavaBeansUtil {
         return field;
     }
 
+    public static Field getJavaControllerField(IntrospectedTable introspectedTable) {
+        FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType(introspectedTable.getJavaServiceType());
+        String property = CommonUtil.lowerFirst(fqjt.getShortName());
+        Field field = new Field(property, fqjt);
+        field.setVisibility(JavaVisibility.PRIVATE);
+        field.addJavaDocLine(CommonConstant.AUTOWIRED);
+        return field;
+    }
+
+    public static Field getJavaServiceField(IntrospectedTable introspectedTable) {
+        FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType(introspectedTable.getMyBatis3JavaMapperType());
+        String property = CommonUtil.lowerFirst(fqjt.getShortName());
+        Field field = new Field(property, fqjt);
+        field.setVisibility(JavaVisibility.PRIVATE);
+        field.addJavaDocLine(CommonConstant.AUTOWIRED);
+        return field;
+    }
+
     public static Field getJavaBeansFieldWithGeneratedAnnotation(IntrospectedColumn introspectedColumn,
             Context context,
             IntrospectedTable introspectedTable,
@@ -254,7 +274,6 @@ public class JavaBeansUtil {
 
         Field field = new Field(property, fqjt);
         field.setVisibility(JavaVisibility.PRIVATE);
-
         return field;
     }
 

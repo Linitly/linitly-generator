@@ -7,4 +7,8 @@ public interface CommonConstant {
     String BASE_PACKAGE = ROOT_PACKAGE + ".base";
 
     String BUSINESS_PACKAGE = ROOT_PACKAGE + ".business";
+
+    String AUTOWIRED = "@Autowired";
+
+    String AUTOWIRED_IMPORT = "org.springframework.beans.factory.annotation.Autowired";
 }
