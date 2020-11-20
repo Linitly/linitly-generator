@@ -26,7 +26,6 @@ import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.config.PropertyRegistry;
-import org.mybatis.generator.linitly.RootClassConstant;
 
 public abstract class AbstractJavaGenerator extends AbstractGenerator {
     public abstract List<CompilationUnit> getCompilationUnits();
@@ -63,11 +62,6 @@ public abstract class AbstractJavaGenerator extends AbstractGenerator {
             rootClass = properties.getProperty(PropertyRegistry.ANY_ROOT_CLASS);
         }
 
-        // Linitly
-        if (rootClass == null) {
-            rootClass = RootClassConstant.FULL_CLASS_NAME;
-        }
-        // Linitly
         return rootClass;
     }
 

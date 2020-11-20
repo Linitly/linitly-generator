@@ -25,7 +25,7 @@ import java.util.*;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.internal.ObjectFactory;
-import org.mybatis.generator.linitly.RootClassConstant;
+import org.mybatis.generator.linitly.ModelSuperClassConstant;
 
 /**
  * Holds information about a class (uses the JavaBeans Introspector to find properties).
@@ -83,7 +83,7 @@ public class RootClassInfo {
             propertyDescriptors = bi.getPropertyDescriptors();
         } catch (Exception e) {
             // Linitly
-            if (className.equals(RootClassConstant.FULL_CLASS_NAME)) {
+            if (className.equals(ModelSuperClassConstant.FULL_CLASS_NAME)) {
                 return;
             }
             // Linitly
@@ -93,12 +93,6 @@ public class RootClassInfo {
     }
 
     public boolean containsProperty(IntrospectedColumn introspectedColumn) {
-        // Linitly 判断是否有字段，相同字段返回true
-        if (Arrays.asList(RootClassConstant.FIELD_NAME).contains(introspectedColumn.getActualColumnName())) {
-            return true;
-        }
-        // Linitly
-
         if (propertyDescriptors == null) {
             return false;
         }

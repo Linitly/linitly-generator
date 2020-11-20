@@ -34,12 +34,17 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.RootClassInfo;
 import org.mybatis.generator.linitly.LombokConstant;
+import org.mybatis.generator.linitly.ModelSuperClassConstant;
 import org.mybatis.generator.linitly.SwaggerConstant;
+import org.mybatis.generator.linitly.vo.ModelVoSuperClassConstant;
 
 public class BaseRecordGenerator extends AbstractJavaGenerator {
 
-    public BaseRecordGenerator(String project) {
+    private String modelType;
+
+    public BaseRecordGenerator(String project, String modelType) {
         super(project);
+        this.modelType = modelType;
     }
 
     @Override
@@ -50,8 +55,14 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
         Plugin plugins = context.getPlugins();
         CommentGenerator commentGenerator = context.getCommentGenerator();
 
-        FullyQualifiedJavaType type = new FullyQualifiedJavaType(
-                introspectedTable.getBaseRecordType());
+        FullyQualifiedJavaType type = null;
+
+        if (modelType.equals(introspectedTable.getBaseRecordType())) {
+            type = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
+        } else if (modelType.equals(introspectedTable.getJavaModelVoType())) {
+            type = new FullyQualifiedJavaType(introspectedTable.getJavaModelVoType());
+        }
+
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
@@ -65,12 +76,21 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
         topLevelClass.addImportedTypes(importedTypes);
 
         topLevelClass.addAllAnnotation(Arrays.asList(LombokConstant.ANNOTATIONS));
-        topLevelClass.addAnnotation(SwaggerConstant.API_MODEL + "(value = \"" + table.getRemark() + "\")");
+        topLevelClass.addAnnotation(SwaggerConstant.API_MODEL + "(value = \"" + table.getRemark() +
+                (modelType.equals(introspectedTable.getBaseRecordType()) ? "" : "VO") + "\")");
 
         FullyQualifiedJavaType superClass = getSuperClass();
         if (superClass != null) {
             topLevelClass.setSuperClass(superClass);
             topLevelClass.addImportedType(superClass);
+        } else {
+            if (modelType.equals(introspectedTable.getBaseRecordType())) {
+                topLevelClass.setSuperClass(new FullyQualifiedJavaType(ModelSuperClassConstant.FULL_CLASS_NAME));
+                topLevelClass.addImportedType(new FullyQualifiedJavaType(ModelSuperClassConstant.FULL_CLASS_NAME));
+            } else if (modelType.equals(introspectedTable.getJavaModelVoType())) {
+                topLevelClass.setSuperClass(new FullyQualifiedJavaType(ModelVoSuperClassConstant.FULL_CLASS_NAME));
+                topLevelClass.addImportedType(new FullyQualifiedJavaType(ModelVoSuperClassConstant.FULL_CLASS_NAME));
+            }
         }
         commentGenerator.addModelClassComment(topLevelClass, introspectedTable);
 
@@ -90,6 +110,14 @@ public class BaseRecordGenerator extends AbstractJavaGenerator {
 
         String rootClass = getRootClass();
         for (IntrospectedColumn introspectedColumn : introspectedColumns) {
+            // Linitly 判断是否有字段，相同字段返回true
+            if (modelType.equals(introspectedTable.getBaseRecordType()) && Arrays.asList(ModelSuperClassConstant.FIELD_NAME).contains(introspectedColumn.getActualColumnName())) {
+                continue;
+            }
+            if (modelType.equals(introspectedTable.getJavaModelVoType()) && Arrays.asList(ModelVoSuperClassConstant.FIELD_NAME).contains(introspectedColumn.getActualColumnName())) {
+                continue;
+            }
+            // Linitly
             if (RootClassInfo.getInstance(rootClass, warnings)
                     .containsProperty(introspectedColumn)) {
                 continue;

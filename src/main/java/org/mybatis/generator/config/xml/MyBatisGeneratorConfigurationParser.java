@@ -49,8 +49,11 @@ import org.mybatis.generator.config.SqlMapGeneratorConfiguration;
 import org.mybatis.generator.config.TableConfiguration;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.ObjectFactory;
+import org.mybatis.generator.linitly.constant.JavaModelDtoGeneratorConfiguration;
 import org.mybatis.generator.linitly.controller.JavaControllerGeneratorConfiguration;
+import org.mybatis.generator.linitly.dto.JavaConstantGeneratorConfiguration;
 import org.mybatis.generator.linitly.service.JavaServiceGeneratorConfiguration;
+import org.mybatis.generator.linitly.vo.JavaModelVoGeneratorConfiguration;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -200,8 +203,50 @@ public class MyBatisGeneratorConfigurationParser {
                 parseJavaControllerGenerator(context, childNode);
             } else if ("javaServiceGenerator".equals(childNode.getNodeName())) {
                 parseJavaServiceGenerator(context, childNode);
+            } else if ("javaConstantGenerator".equals(childNode.getNodeName())) {
+                parseJavaConstantGenerator(context, childNode);
+            } else if ("javaModelDtoGenerator".equals(childNode.getNodeName())) {
+                parseJavaModelDtoGenerator(context, childNode);
+            } else if ("javaModelVoGenerator".equals(childNode.getNodeName())) {
+                parseJavaModelVoGenerator(context, childNode);
             }
         }
+    }
+
+    private void parseJavaConstantGenerator(Context context, Node childNode) {
+        JavaConstantGeneratorConfiguration javaConstantGeneratorConfiguration = new JavaConstantGeneratorConfiguration();
+
+        context.setJavaConstantGeneratorConfiguration(javaConstantGeneratorConfiguration);
+        Properties attributes = parseAttributes(childNode);
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+
+        javaConstantGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaConstantGeneratorConfiguration.setTargetProject(targetProject);
+    }
+
+    private void parseJavaModelVoGenerator(Context context, Node childNode) {
+        JavaModelVoGeneratorConfiguration javaModelVoGeneratorConfiguration = new JavaModelVoGeneratorConfiguration();
+
+        context.setJavaModelVoGeneratorConfiguration(javaModelVoGeneratorConfiguration);
+        Properties attributes = parseAttributes(childNode);
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+
+        javaModelVoGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaModelVoGeneratorConfiguration.setTargetProject(targetProject);
+    }
+
+    private void parseJavaModelDtoGenerator(Context context, Node childNode) {
+        JavaModelDtoGeneratorConfiguration javaModelDtoGeneratorConfiguration = new JavaModelDtoGeneratorConfiguration();
+
+        context.setJavaModelDtoGeneratorConfiguration(javaModelDtoGeneratorConfiguration);
+        Properties attributes = parseAttributes(childNode);
+        String targetPackage = attributes.getProperty("targetPackage"); //$NON-NLS-1$
+        String targetProject = attributes.getProperty("targetProject"); //$NON-NLS-1$
+
+        javaModelDtoGeneratorConfiguration.setTargetPackage(targetPackage);
+        javaModelDtoGeneratorConfiguration.setTargetProject(targetProject);
     }
 
     protected void parseSqlMapGenerator(Context context, Node node) {

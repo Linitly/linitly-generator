@@ -248,12 +248,7 @@ public class JavaBeansUtil {
         anno.append(SwaggerConstant.API_MODEL_PROPERTY);
         anno.append("(value = \"");
         anno.append(remarks);
-        anno.append("\"");
-        if (introspectedColumn.isNullable()) {
-            anno.append(")");
-        } else {
-            anno.append(", required = true)");
-        }
+        anno.append("\")");
         field.addAnnotation(anno.toString());
     }
 
@@ -284,7 +279,7 @@ public class JavaBeansUtil {
         return field;
     }
 
-    private static Field getBasicJavaBeansField(IntrospectedColumn introspectedColumn) {
+    public static Field getBasicJavaBeansField(IntrospectedColumn introspectedColumn) {
         FullyQualifiedJavaType fqjt = introspectedColumn
                 .getFullyQualifiedJavaType();
         String property = introspectedColumn.getJavaProperty();

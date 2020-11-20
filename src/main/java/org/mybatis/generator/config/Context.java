@@ -42,8 +42,11 @@ import org.mybatis.generator.internal.JDBCConnectionFactory;
 import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.internal.PluginAggregator;
 import org.mybatis.generator.internal.db.DatabaseIntrospector;
+import org.mybatis.generator.linitly.constant.JavaModelDtoGeneratorConfiguration;
 import org.mybatis.generator.linitly.controller.JavaControllerGeneratorConfiguration;
+import org.mybatis.generator.linitly.dto.JavaConstantGeneratorConfiguration;
 import org.mybatis.generator.linitly.service.JavaServiceGeneratorConfiguration;
+import org.mybatis.generator.linitly.vo.JavaModelVoGeneratorConfiguration;
 
 public class Context extends PropertyHolder {
 
@@ -58,6 +61,12 @@ public class Context extends PropertyHolder {
     private JavaTypeResolverConfiguration javaTypeResolverConfiguration;
 
     private JavaModelGeneratorConfiguration javaModelGeneratorConfiguration;
+
+    private JavaModelDtoGeneratorConfiguration javaModelDtoGeneratorConfiguration;
+
+    private JavaModelVoGeneratorConfiguration javaModelVoGeneratorConfiguration;
+
+    private JavaConstantGeneratorConfiguration javaConstantGeneratorConfiguration;
 
     private JavaClientGeneratorConfiguration javaClientGeneratorConfiguration;
 
@@ -138,6 +147,30 @@ public class Context extends PropertyHolder {
 
     public void setJavaServiceGeneratorConfiguration(JavaServiceGeneratorConfiguration javaServiceGeneratorConfiguration) {
         this.javaServiceGeneratorConfiguration = javaServiceGeneratorConfiguration;
+    }
+
+    public JavaModelDtoGeneratorConfiguration getJavaModelDtoGeneratorConfiguration() {
+        return javaModelDtoGeneratorConfiguration;
+    }
+
+    public void setJavaModelDtoGeneratorConfiguration(JavaModelDtoGeneratorConfiguration javaModelDtoGeneratorConfiguration) {
+        this.javaModelDtoGeneratorConfiguration = javaModelDtoGeneratorConfiguration;
+    }
+
+    public JavaModelVoGeneratorConfiguration getJavaModelVoGeneratorConfiguration() {
+        return javaModelVoGeneratorConfiguration;
+    }
+
+    public void setJavaModelVoGeneratorConfiguration(JavaModelVoGeneratorConfiguration javaModelVoGeneratorConfiguration) {
+        this.javaModelVoGeneratorConfiguration = javaModelVoGeneratorConfiguration;
+    }
+
+    public JavaConstantGeneratorConfiguration getJavaConstantGeneratorConfiguration() {
+        return javaConstantGeneratorConfiguration;
+    }
+
+    public void setJavaConstantGeneratorConfiguration(JavaConstantGeneratorConfiguration javaConstantGeneratorConfiguration) {
+        this.javaConstantGeneratorConfiguration = javaConstantGeneratorConfiguration;
     }
 
     public JavaTypeResolverConfiguration getJavaTypeResolverConfiguration() {

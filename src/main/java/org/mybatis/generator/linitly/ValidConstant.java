@@ -19,7 +19,6 @@ public interface ValidConstant {
     String RANGE_IMPORT = "org.hibernate.validator.constraints.Range";
 
 
-
     String EMPTY_ERROR_CONSTANT_SUFFIX = "_EMPTY_ERROR";
 
     String EMPTY_ERROR_TIP_SUFFIX = "不能为空";
@@ -32,7 +31,7 @@ public interface ValidConstant {
 
     String SIZE_ERROR_CONSTANT_SUFFIX = "_SIZE_ERROR";
 
-    String RANGE_ERROR_TIP_SUFFIX = "_RANGE";
+    String RANGE_ERROR_CONSTANT_SUFFIX = "_RANGE_ERROR";
 
-    String RANGE_ERROR_CONSTANT_SUFFIX = "大小不符合限制";
+    String RANGE_ERROR_TIP_SUFFIX = "大小不符合限制";
 }

@@ -35,15 +35,17 @@ import org.mybatis.generator.codegen.mybatis3.javamapper.AnnotatedClientGenerato
 import org.mybatis.generator.codegen.mybatis3.javamapper.JavaMapperGenerator;
 import org.mybatis.generator.codegen.mybatis3.javamapper.MixedClientGenerator;
 import org.mybatis.generator.codegen.mybatis3.model.BaseRecordGenerator;
-import org.mybatis.generator.codegen.mybatis3.model.ExampleGenerator;
 import org.mybatis.generator.codegen.mybatis3.model.PrimaryKeyGenerator;
 import org.mybatis.generator.codegen.mybatis3.model.RecordWithBLOBsGenerator;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.XMLMapperGenerator;
 import org.mybatis.generator.config.PropertyRegistry;
 import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.internal.util.StringUtility;
+import org.mybatis.generator.linitly.constant.JavaConstantGenerator;
 import org.mybatis.generator.linitly.controller.JavaControllerGenerator;
+import org.mybatis.generator.linitly.dto.JavaModelDtoGenerator;
 import org.mybatis.generator.linitly.service.JavaServiceGenerator;
+import org.mybatis.generator.linitly.vo.JavaModelVoGenerator;
 
 /**
  * Introspected table implementation for generating MyBatis3 artifacts.
@@ -66,6 +68,9 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
     public void calculateGenerators(List<String> warnings,
                                     ProgressCallback progressCallback) {
         calculateJavaModelGenerators(warnings, progressCallback);
+        calculateJavaModelDtoGenerators(warnings, progressCallback);
+        calculateJavaModelVoGenerators(warnings, progressCallback);
+        calculateJavaConstantGenerators(warnings, progressCallback);
         calculateJavaControllerGenerators(warnings, progressCallback);
         calculateJavaServiceGenerators(warnings, progressCallback);
 
@@ -149,7 +154,7 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
         }
 
         if (getRules().generateBaseRecordClass()) {
-            AbstractJavaGenerator javaGenerator = new BaseRecordGenerator(getModelProject());
+            AbstractJavaGenerator javaGenerator = new BaseRecordGenerator(getModelProject(), getBaseRecordType());
             initializeAbstractGenerator(javaGenerator, warnings,
                     progressCallback);
             javaGenerators.add(javaGenerator);
@@ -174,6 +179,30 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
     protected void calculateJavaControllerGenerators(List<String> warnings, ProgressCallback progressCallback) {
         if (context.getJavaControllerGeneratorConfiguration() != null) {
             AbstractJavaGenerator javaGenerator = new JavaControllerGenerator(getControllerProject());
+            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
+            javaGenerators.add(javaGenerator);
+        }
+    }
+
+    protected void calculateJavaModelDtoGenerators(List<String> warnings, ProgressCallback progressCallback) {
+        if (context.getJavaModelDtoGeneratorConfiguration() != null) {
+            AbstractJavaGenerator javaGenerator = new JavaModelDtoGenerator(getModelDtoProject());
+            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
+            javaGenerators.add(javaGenerator);
+        }
+    }
+
+    protected void calculateJavaModelVoGenerators(List<String> warnings, ProgressCallback progressCallback) {
+        if (context.getJavaModelVoGeneratorConfiguration() != null) {
+            AbstractJavaGenerator javaGenerator = new BaseRecordGenerator(getModelVoProject(), getJavaModelVoType());
+            initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
+            javaGenerators.add(javaGenerator);
+        }
+    }
+
+    protected void calculateJavaConstantGenerators(List<String> warnings, ProgressCallback progressCallback) {
+        if (context.getJavaConstantGeneratorConfiguration() != null) {
+            AbstractJavaGenerator javaGenerator = new JavaConstantGenerator(getConstantProject());
             initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
             javaGenerators.add(javaGenerator);
         }
@@ -243,6 +272,18 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
 
     protected String getServiceProject() {
         return context.getJavaServiceGeneratorConfiguration().getTargetProject();
+    }
+
+    protected String getConstantProject() {
+        return context.getJavaConstantGeneratorConfiguration().getTargetProject();
+    }
+
+    protected String getModelDtoProject() {
+        return context.getJavaModelDtoGeneratorConfiguration().getTargetProject();
+    }
+
+    protected String getModelVoProject() {
+        return context.getJavaModelVoGeneratorConfiguration().getTargetProject();
     }
 
     protected String getExampleProject() {

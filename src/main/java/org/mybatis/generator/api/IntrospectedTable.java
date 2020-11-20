@@ -66,6 +66,9 @@ public abstract class IntrospectedTable {
         ATTR_BASE_RECORD_TYPE,
         ATTR_RECORD_WITH_BLOBS_TYPE,
         ATTR_EXAMPLE_TYPE,
+        ATTR_JAVA_MODEL_DTO_TYPE,
+        ATTR_JAVA_MODEL_VO_TYPE,
+        ATTR_JAVA_CONSTANT_TYPE,
         ATTR_JAVA_CONTROLLER_TYPE,
         ATTR_JAVA_SERVICE_TYPE,
         ATTR_MYBATIS3_XML_MAPPER_PACKAGE,
@@ -393,6 +396,9 @@ public abstract class IntrospectedTable {
         calculateModelAttributes();
         calculateJavaServiceAttributes();
         calculateJavaControllerAttributes();
+        calculateJavaModelDtoAttribute();
+        calculateJavaModelVoAttribute();
+        calculateJavaConstantAttribute();
         calculateXmlAttributes();
 
         if (tableConfiguration.getModelType() == ModelType.HIERARCHICAL) {
@@ -404,6 +410,42 @@ public abstract class IntrospectedTable {
         }
 
         context.getPlugins().initialized(this);
+    }
+
+    private void calculateJavaConstantAttribute() {
+        String packageName = calculateJavaConstantPackage();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(packageName);
+        sb.append('.');
+        sb.append(fullyQualifiedTable.getDomainObjectName());
+        sb.append("Constant");
+
+        setJavaConstantType(sb.toString());
+    }
+
+    private void calculateJavaModelDtoAttribute() {
+        String packageName = calculateJavaModelDtoPackage();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(packageName);
+        sb.append('.');
+        sb.append(fullyQualifiedTable.getDomainObjectName());
+        sb.append("DTO");
+
+        setJavaModelDtoType(sb.toString());
+    }
+
+    private void calculateJavaModelVoAttribute() {
+        String packageName = calculateJavaModelVoPackage();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(packageName);
+        sb.append('.');
+        sb.append(fullyQualifiedTable.getDomainObjectName());
+        sb.append("VO");
+
+        setJavaModelVoType(sb.toString());
     }
 
     protected void calculateXmlAttributes() {
@@ -738,6 +780,18 @@ public abstract class IntrospectedTable {
         return config.getTargetPackage();
     }
 
+    private String calculateJavaModelDtoPackage() {
+        return context.getJavaModelDtoGeneratorConfiguration().getTargetPackage();
+    }
+
+    private String calculateJavaModelVoPackage() {
+        return context.getJavaModelVoGeneratorConfiguration().getTargetPackage();
+    }
+
+    private String calculateJavaConstantPackage() {
+        return context.getJavaConstantGeneratorConfiguration().getTargetPackage();
+    }
+
   protected void calculateModelAttributes() {
         String pakkage = calculateJavaModelPackage();
 
@@ -1047,6 +1101,30 @@ public abstract class IntrospectedTable {
 
     public void setJavaServiceType(String javaServiceType) {
         internalAttributes.put(InternalAttribute.ATTR_JAVA_SERVICE_TYPE, javaServiceType);
+    }
+
+    public String getJavaModelDtoType() {
+        return internalAttributes.get(InternalAttribute.ATTR_JAVA_MODEL_DTO_TYPE);
+    }
+
+    public void setJavaModelDtoType(String javaModelDtoType) {
+        internalAttributes.put(InternalAttribute.ATTR_JAVA_MODEL_DTO_TYPE, javaModelDtoType);
+    }
+
+    public String getJavaModelVoType() {
+        return internalAttributes.get(InternalAttribute.ATTR_JAVA_MODEL_VO_TYPE);
+    }
+
+    public void setJavaModelVoType(String javaModelVoType) {
+        internalAttributes.put(InternalAttribute.ATTR_JAVA_MODEL_VO_TYPE, javaModelVoType);
+    }
+
+    public String getJavaConstantType() {
+        return internalAttributes.get(InternalAttribute.ATTR_JAVA_CONSTANT_TYPE);
+    }
+
+    public void setJavaConstantType(String javaConstantType) {
+        internalAttributes.put(InternalAttribute.ATTR_JAVA_CONSTANT_TYPE, javaConstantType);
     }
 
     public String getMyBatis3SqlProviderType() {

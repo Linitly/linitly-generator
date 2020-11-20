@@ -113,6 +113,21 @@
   targetPackage CDATA #REQUIRED
   targetProject CDATA #REQUIRED>
 
+<!ELEMENT javaModelDtoGenerator (property*)>
+<!ATTLIST javaControllerGenerator
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+<!ELEMENT javaModelVoGenerator (property*)>
+<!ATTLIST javaControllerGenerator
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
+<!ELEMENT javaConstantGenerator (property*)>
+<!ATTLIST javaControllerGenerator
+        targetPackage CDATA #REQUIRED
+        targetProject CDATA #REQUIRED>
+
 <!ELEMENT javaControllerGenerator (property*)>
 <!ATTLIST javaControllerGenerator
         targetPackage CDATA #REQUIRED

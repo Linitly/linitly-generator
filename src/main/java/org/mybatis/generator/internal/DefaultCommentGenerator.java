@@ -28,23 +28,13 @@ import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.MyBatisGenerator;
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.InnerClass;
-import org.mybatis.generator.api.dom.java.InnerEnum;
-import org.mybatis.generator.api.dom.java.JavaElement;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.kotlin.KotlinFile;
-import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.MergeConstants;
 import org.mybatis.generator.config.PropertyRegistry;
 import org.mybatis.generator.internal.util.StringUtility;
-import org.mybatis.generator.linitly.RootClassConstant;
-import org.mybatis.generator.linitly.SwaggerConstant;
+import org.mybatis.generator.linitly.CommonConstant;
 
 public class DefaultCommentGenerator implements CommentGenerator {
 
@@ -185,8 +175,8 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        sb.append(introspectedTable.getFullyQualifiedTable());
         // Linitly
         innerClass.addJavaDocLine("/**");
-        innerClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
-        innerClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
+        innerClass.addJavaDocLine(" * @author: " + CommonConstant.AUTHOR);
+        innerClass.addJavaDocLine(" * @date: " + CommonConstant.DATE_FORMAT.format(new Date()));
         innerClass.addJavaDocLine(" * @description: ");
         innerClass.addJavaDocLine(" */");
 
@@ -214,8 +204,8 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        sb.append(introspectedTable.getFullyQualifiedTable());
         // Linitly
         innerClass.addJavaDocLine("/**");
-        innerClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
-        innerClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
+        innerClass.addJavaDocLine(" * @author: " + CommonConstant.AUTHOR);
+        innerClass.addJavaDocLine(" * @date: " + CommonConstant.DATE_FORMAT.format(new Date()));
         innerClass.addJavaDocLine(" * @description: ");
         innerClass.addJavaDocLine(" */");
 
@@ -256,8 +246,8 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        topLevelClass.addJavaDocLine(" */"); //$NON-NLS-1$
         // Linitly
         topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
-        topLevelClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
+        topLevelClass.addJavaDocLine(" * @author: " + CommonConstant.AUTHOR);
+        topLevelClass.addJavaDocLine(" * @date: " + CommonConstant.DATE_FORMAT.format(new Date()));
         topLevelClass.addJavaDocLine(" * @description: ");
         topLevelClass.addJavaDocLine(" */");
         // Linitly
@@ -267,11 +257,20 @@ public class DefaultCommentGenerator implements CommentGenerator {
     public void addLinitlyClassComment(TopLevelClass topLevelClass) {
         // Linitly
         topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
-        topLevelClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
+        topLevelClass.addJavaDocLine(" * @author: " + CommonConstant.AUTHOR);
+        topLevelClass.addJavaDocLine(" * @date: " + CommonConstant.DATE_FORMAT.format(new Date()));
         topLevelClass.addJavaDocLine(" * @description: ");
         topLevelClass.addJavaDocLine(" */");
         // Linitly
+    }
+
+    @Override
+    public void addLinitlyClassComment(Interface interfaze) {
+        interfaze.addJavaDocLine("/**");
+        interfaze.addJavaDocLine(" * @author: " + CommonConstant.AUTHOR);
+        interfaze.addJavaDocLine(" * @date: " + CommonConstant.DATE_FORMAT.format(new Date()));
+        interfaze.addJavaDocLine(" * @description: ");
+        interfaze.addJavaDocLine(" */");
     }
 
     @Override

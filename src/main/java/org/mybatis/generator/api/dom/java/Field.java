@@ -30,6 +30,12 @@ public class Field extends JavaElement {
         this.type = type;
     }
 
+    public Field(String name, FullyQualifiedJavaType type, String initializationString) {
+        this.name = name;
+        this.type = type;
+        this.initializationString = initializationString;
+    }
+
     public Field(Field field) {
         super(field);
         this.type = field.type;

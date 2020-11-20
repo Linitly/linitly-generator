@@ -18,13 +18,7 @@ package org.mybatis.generator.api;
 import java.util.Properties;
 import java.util.Set;
 
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.InnerClass;
-import org.mybatis.generator.api.dom.java.InnerEnum;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.kotlin.KotlinFile;
 import org.mybatis.generator.api.dom.kotlin.KotlinFunction;
 import org.mybatis.generator.api.dom.kotlin.KotlinProperty;
@@ -97,6 +91,8 @@ public interface CommentGenerator {
             IntrospectedTable introspectedTable);
 
     void addLinitlyClassComment(TopLevelClass topLevelClass);
+
+    void addLinitlyClassComment(Interface interfaze);
 
     /**
      * Adds a comment for a model class.

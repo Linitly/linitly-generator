@@ -1,5 +1,7 @@
 package org.mybatis.generator.linitly;
 
+import java.text.SimpleDateFormat;
+
 public interface CommonConstant {
 
     String ROOT_PACKAGE = "org.linitly.boot";
@@ -11,4 +13,10 @@ public interface CommonConstant {
     String AUTOWIRED = "@Autowired";
 
     String AUTOWIRED_IMPORT = "org.springframework.beans.factory.annotation.Autowired";
+
+    String AUTHOR = "linitly-generator";
+
+    SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+    String MODEL_CLASS_PACKAGE = CommonConstant.BUSINESS_PACKAGE + ".helper.entity";
 }

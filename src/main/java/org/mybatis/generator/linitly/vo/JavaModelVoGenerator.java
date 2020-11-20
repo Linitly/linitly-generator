@@ -1,4 +1,4 @@
-package org.mybatis.generator.linitly.controller;
+package org.mybatis.generator.linitly.vo;
 
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.FullyQualifiedTable;
@@ -7,6 +7,7 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.linitly.*;
+import org.mybatis.generator.linitly.controller.ControllerConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +16,9 @@ import java.util.TreeSet;
 
 import static org.mybatis.generator.internal.util.JavaBeansUtil.getJavaControllerField;
 
-public class JavaControllerGenerator extends AbstractJavaGenerator {
+public class JavaModelVoGenerator extends AbstractJavaGenerator {
 
-    public JavaControllerGenerator(String project) {
+    public JavaModelVoGenerator(String project) {
         super(project);
     }
 
@@ -166,7 +167,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
 
         Parameter parameter = new Parameter(new FullyQualifiedJavaType(table.getDomainObjectName()), CommonUtil.lowerFirst(table.getDomainObjectName()));
         parameter.addAnnotation(ControllerConstant.REQUEST_BODY);
-        parameter.addAnnotation(ValidConstant.VALIDATED + "({" + ControllerConstant.UPDATE_VALID_GROUP_CLASS + "})");
+        parameter.addAnnotation(ValidConstant.VALIDATED + "({" + ControllerConstant.INSERT_VALID_GROUP_CLASS + ", " + ControllerConstant.UPDATE_VALID_GROUP_CLASS + "})");
         method.addParameter(0, parameter);
 
         Parameter bindingResultParameter = new Parameter(new FullyQualifiedJavaType(ControllerConstant.BINDING_RESULT_TYPE),

@@ -25,7 +25,7 @@ import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 import org.mybatis.generator.linitly.MapperConstant;
-import org.mybatis.generator.linitly.RootClassConstant;
+import org.mybatis.generator.linitly.ModelSuperClassConstant;
 
 public class ResultMapWithoutBLOBsElementGenerator extends
         AbstractXmlElementGenerator {
@@ -173,7 +173,7 @@ public class ResultMapWithoutBLOBsElementGenerator extends
 //        return new Attribute("column", //$NON-NLS-1$
 //                MyBatis3FormattingUtilities.getRenamedColumnNameForResultMap(introspectedColumn));
         String columnValue = MyBatis3FormattingUtilities.getRenamedColumnNameForResultMap(introspectedColumn);
-        if (Arrays.asList(RootClassConstant.FIELD_NAME).contains(columnValue)) {
+        if (Arrays.asList(ModelSuperClassConstant.FIELD_NAME).contains(columnValue)) {
             return null;
         } else {
             return new Attribute("column", //$NON-NLS-1$
