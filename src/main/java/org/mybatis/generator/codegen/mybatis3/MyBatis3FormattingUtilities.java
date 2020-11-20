@@ -37,7 +37,7 @@ public class MyBatis3FormattingUtilities {
 
         sb.append("#{"); //$NON-NLS-1$
         sb.append(introspectedColumn.getJavaProperty(prefix));
-        sb.append(",jdbcType="); //$NON-NLS-1$
+        sb.append(", jdbcType="); //$NON-NLS-1$
         sb.append(introspectedColumn.getJdbcTypeName());
 
         if (stringHasValue(introspectedColumn.getTypeHandler())) {

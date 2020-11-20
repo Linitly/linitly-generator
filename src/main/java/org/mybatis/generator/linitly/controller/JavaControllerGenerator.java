@@ -78,7 +78,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
 
         Parameter parameter = new Parameter(new FullyQualifiedJavaType(table.getDomainObjectName()), CommonUtil.lowerFirst(table.getDomainObjectName()));
         parameter.addAnnotation(ControllerConstant.REQUEST_BODY + "(required = false)");
-        method.addParameter(2, pageSizeParameter);
+        method.addParameter(2, parameter);
 
         StringBuilder sb = new StringBuilder();
 
