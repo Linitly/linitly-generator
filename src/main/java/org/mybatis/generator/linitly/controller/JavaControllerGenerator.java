@@ -6,10 +6,7 @@ import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
-import org.mybatis.generator.linitly.CSEnum;
-import org.mybatis.generator.linitly.CommonConstant;
-import org.mybatis.generator.linitly.CommonUtil;
-import org.mybatis.generator.linitly.SwaggerConstant;
+import org.mybatis.generator.linitly.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,7 +166,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
 
         Parameter parameter = new Parameter(new FullyQualifiedJavaType(table.getDomainObjectName()), CommonUtil.lowerFirst(table.getDomainObjectName()));
         parameter.addAnnotation(ControllerConstant.REQUEST_BODY);
-        parameter.addAnnotation(ControllerConstant.VALIDATED + "({" + ControllerConstant.INSERT_VALID_GROUP_CLASS + ", " + ControllerConstant.UPDATE_VALID_GROUP_CLASS + "})");
+        parameter.addAnnotation(ValidConstant.VALIDATED + "({" + ControllerConstant.INSERT_VALID_GROUP_CLASS + ", " + ControllerConstant.UPDATE_VALID_GROUP_CLASS + "})");
         method.addParameter(0, parameter);
 
         Parameter bindingResultParameter = new Parameter(new FullyQualifiedJavaType(ControllerConstant.BINDING_RESULT_TYPE),
@@ -196,7 +193,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
 
         Parameter parameter = new Parameter(new FullyQualifiedJavaType(table.getDomainObjectName()), CommonUtil.lowerFirst(table.getDomainObjectName()));
         parameter.addAnnotation(ControllerConstant.REQUEST_BODY);
-        parameter.addAnnotation(ControllerConstant.VALIDATED + "({" + ControllerConstant.INSERT_VALID_GROUP_CLASS + "})");
+        parameter.addAnnotation(ValidConstant.VALIDATED + "({" + ControllerConstant.INSERT_VALID_GROUP_CLASS + "})");
         method.addParameter(0, parameter);
 
         Parameter bindingResultParameter = new Parameter(new FullyQualifiedJavaType(ControllerConstant.BINDING_RESULT_TYPE),
@@ -242,7 +239,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
         importedTypes.add(new FullyQualifiedJavaType(ControllerConstant.INSERT_VALID_GROUP_IMPORT));
         importedTypes.add(new FullyQualifiedJavaType(ControllerConstant.UPDATE_VALID_GROUP_IMPORT));
         importedTypes.add(new FullyQualifiedJavaType(ControllerConstant.ADMIN_COMMON_CONSTANT_IMPORT));
-        importedTypes.add(new FullyQualifiedJavaType(ControllerConstant.VALIDATED_IMPORT));
+        importedTypes.add(new FullyQualifiedJavaType(ValidConstant.VALIDATED_IMPORT));
         importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getJavaServiceType()));
         importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getBaseRecordType()));
         importedTypes.add(FullyQualifiedJavaType.getNewListInstance());

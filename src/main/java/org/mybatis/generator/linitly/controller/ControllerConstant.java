@@ -26,11 +26,6 @@ public interface ControllerConstant {
 
     String WEB_ANNO_IMPORT = "org.springframework.web.bind.annotation.*";
 
-    String VALIDATED = "@Validated";
-
-    String VALIDATED_IMPORT = "org.springframework.validation.annotation.Validated";
-
-
     String BINDING_RESULT_TYPE = "BindingResult";
 
     String BINDING_RESULT_IMPORT = "org.springframework.validation.BindingResult";
