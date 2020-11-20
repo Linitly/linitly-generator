@@ -33,6 +33,7 @@ import org.mybatis.generator.config.PropertyRegistry;
 import org.mybatis.generator.config.TableConfiguration;
 import org.mybatis.generator.linitly.CommonConstant;
 import org.mybatis.generator.linitly.CommonUtil;
+import org.mybatis.generator.linitly.SwaggerConstant;
 
 public class JavaBeansUtil {
 
@@ -236,8 +237,24 @@ public class JavaBeansUtil {
             Context context,
             IntrospectedTable introspectedTable) {
         Field field = getBasicJavaBeansField(introspectedColumn);
+        addJavaBeansFieldAnno(introspectedColumn, field);
         addGeneratedJavaDoc(field, context, introspectedColumn, introspectedTable);
         return field;
+    }
+
+    private static void addJavaBeansFieldAnno(IntrospectedColumn introspectedColumn, Field field) {
+        String remarks = introspectedColumn.getRemarks();
+        StringBuilder anno = new StringBuilder();
+        anno.append(SwaggerConstant.API_MODEL_PROPERTY);
+        anno.append("(value = \"");
+        anno.append(remarks);
+        anno.append("\"");
+        if (introspectedColumn.isNullable()) {
+            anno.append(")");
+        } else {
+            anno.append(", required = true)");
+        }
+        field.addAnnotation(anno.toString());
     }
 
     public static Field getJavaControllerField(IntrospectedTable introspectedTable) {
