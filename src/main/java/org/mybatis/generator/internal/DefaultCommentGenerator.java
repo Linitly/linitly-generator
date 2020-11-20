@@ -255,14 +255,23 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //
 //        topLevelClass.addJavaDocLine(" */"); //$NON-NLS-1$
         // Linitly
-        StringBuilder sb = new StringBuilder();
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
         topLevelClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
         topLevelClass.addJavaDocLine(" * @description: ");
         topLevelClass.addJavaDocLine(" */");
         // Linitly
-        topLevelClass.addJavaDocLine(sb.toString());
+    }
+
+    @Override
+    public void addLinitlyClassComment(TopLevelClass topLevelClass) {
+        // Linitly
+        topLevelClass.addJavaDocLine("/**");
+        topLevelClass.addJavaDocLine(" * @author: " + RootClassConstant.AUTHOR);
+        topLevelClass.addJavaDocLine(" * @date: " + RootClassConstant.DATE_FORMAT.format(new Date()));
+        topLevelClass.addJavaDocLine(" * @description: ");
+        topLevelClass.addJavaDocLine(" */");
+        // Linitly
     }
 
     @Override

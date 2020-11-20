@@ -35,6 +35,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
         TopLevelClass topLevelClass = new TopLevelClass(type);
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
+        commentGenerator.addLinitlyClassComment(topLevelClass);
 
         setImportedTypes(topLevelClass);
         setAnnotations(topLevelClass, table);

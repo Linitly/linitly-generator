@@ -96,6 +96,8 @@ public interface CommentGenerator {
     void addModelClassComment(TopLevelClass topLevelClass,
             IntrospectedTable introspectedTable);
 
+    void addLinitlyClassComment(TopLevelClass topLevelClass);
+
     /**
      * Adds a comment for a model class.
      *
