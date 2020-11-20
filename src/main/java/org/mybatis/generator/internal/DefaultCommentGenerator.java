@@ -327,8 +327,17 @@ public class DefaultCommentGenerator implements CommentGenerator {
 //        field.addJavaDocLine(" */"); //$NON-NLS-1$
         // Linitly
         String remarks = introspectedColumn.getRemarks();
-        String javaDoc = SwaggerConstant.API_MODEL_PROPERTY + "(value = \"" + remarks + "\")";
-        field.addJavaDocLine(javaDoc);
+        StringBuilder javaDoc = new StringBuilder();
+        javaDoc.append(SwaggerConstant.API_MODEL_PROPERTY);
+        javaDoc.append("(value = \"");
+        javaDoc.append(remarks);
+        javaDoc.append("\"");
+        if (introspectedColumn.isNullable()) {
+            javaDoc.append(")");
+        } else {
+            javaDoc.append(", required = true)");
+        }
+        field.addJavaDocLine(javaDoc.toString());
         // Linitly
     }
 
