@@ -1,7 +1,14 @@
 package org.mybatis.generator.linitly;
 
 import org.mybatis.generator.api.IntrospectedColumn;
+import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
+import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.linitly.controller.ControllerConstant;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommonUtil {
 
@@ -20,6 +27,14 @@ public class CommonUtil {
             objectName = type.substring(index + 1);
         }
         return objectName;
+    }
+
+    public static String getModelDtoType(IntrospectedTable introspectedTable) {
+        return getObjectNameByType(introspectedTable.getJavaModelDtoType());
+    }
+
+    public static Parameter getModelDtoParameter(IntrospectedTable introspectedTable) {
+        return new Parameter(new FullyQualifiedJavaType(getModelDtoType(introspectedTable)), CommonConstant.DTO_NAME);
     }
 
     public static String getNotEmptyConstant(IntrospectedColumn column) {

@@ -41,7 +41,7 @@ public class JavaModelVoGeneratorConfiguration extends PropertyHolder {
 
         if (!stringHasValue(targetPackage)) {
             errors.add(getString("ValidationError.12", //$NON-NLS-1$
-                    "JavaModelVoGenerator", contextId)); //$NON-NLS-1$
+                    "BaseModelGenerator", contextId)); //$NON-NLS-1$
         }
     }
 }

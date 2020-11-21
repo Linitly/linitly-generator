@@ -125,10 +125,13 @@ public class JavaServiceGenerator extends AbstractJavaGenerator {
     private void setUpdateMethod(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, FullyQualifiedTable table) {
         Method method = new Method(introspectedTable.getUpdateByPrimaryKeyStatementId());
         method.setVisibility(JavaVisibility.PUBLIC);
-        Parameter parameter = new Parameter(new FullyQualifiedJavaType(table.getDomainObjectName()), CommonUtil.lowerFirst(table.getDomainObjectName()));
+        Parameter parameter = CommonUtil.getModelDtoParameter(introspectedTable);
         method.addParameter(parameter);
 
         StringBuilder sb = new StringBuilder();
+        addNewObjectLine(sb, table, method);
+        addCopyPropertyLine(sb, method, CommonConstant.DTO_NAME, CommonUtil.lowerFirst(table.getDomainObjectName()));
+
         sb.append(CommonUtil.lowerFirst(new FullyQualifiedJavaType(introspectedTable.getMyBatis3JavaMapperType()).getShortName()));
         sb.append(".");
         sb.append(introspectedTable.getUpdateByPrimaryKeyStatementId());
@@ -144,10 +147,14 @@ public class JavaServiceGenerator extends AbstractJavaGenerator {
         Method method = new Method(introspectedTable.getInsertStatementId());
         method.setVisibility(JavaVisibility.PUBLIC);
 
-        Parameter parameter = new Parameter(new FullyQualifiedJavaType(table.getDomainObjectName()), CommonUtil.lowerFirst(table.getDomainObjectName()));
+        Parameter parameter = CommonUtil.getModelDtoParameter(introspectedTable);
         method.addParameter(parameter);
 
         StringBuilder sb = new StringBuilder();
+        addNewObjectLine(sb, table, method);
+        addCopyPropertyLine(sb, method, CommonConstant.DTO_NAME, CommonUtil.lowerFirst(table.getDomainObjectName()));
+
+
         sb.append(CommonUtil.lowerFirst(new FullyQualifiedJavaType(introspectedTable.getMyBatis3JavaMapperType()).getShortName()));
         sb.append(".");
         sb.append(introspectedTable.getInsertStatementId());
@@ -163,10 +170,34 @@ public class JavaServiceGenerator extends AbstractJavaGenerator {
         Set<FullyQualifiedJavaType> importedTypes = new TreeSet<>();
         importedTypes.add(new FullyQualifiedJavaType(CommonConstant.AUTOWIRED_IMPORT));
         importedTypes.add(new FullyQualifiedJavaType(ServiceConstant.SERVICE_IMPORT));
+        importedTypes.add(new FullyQualifiedJavaType(ServiceConstant.BEAN_UTILS_IMPORT));
         importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getMyBatis3JavaMapperType()));
+        importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getJavaModelDtoType()));
         importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getBaseRecordType()));
         importedTypes.add(FullyQualifiedJavaType.getNewListInstance());
         topLevelClass.addImportedTypes(importedTypes);
+    }
+
+    private void addNewObjectLine(StringBuilder sb, FullyQualifiedTable table, Method method) {
+        sb.append(table.getDomainObjectName());
+        sb.append(" ");
+        sb.append(CommonUtil.lowerFirst(table.getDomainObjectName()));
+        sb.append(" = new ");
+        sb.append(table.getDomainObjectName());
+        sb.append("();");
+        method.addBodyLine(sb.toString());
+        sb.setLength(0);
+    }
+
+    private void addCopyPropertyLine(StringBuilder sb, Method method, String dtoName, String modelName) {
+        sb.append(ServiceConstant.BEAN_UTILS);
+        sb.append(".copyProperties(");
+        sb.append(dtoName);
+        sb.append("， ");
+        sb.append(modelName);
+        sb.append(");");
+        method.addBodyLine(sb.toString());
+        sb.setLength(0);
     }
 
     private void setFields(TopLevelClass topLevelClass, Context context, IntrospectedTable introspectedTable) {

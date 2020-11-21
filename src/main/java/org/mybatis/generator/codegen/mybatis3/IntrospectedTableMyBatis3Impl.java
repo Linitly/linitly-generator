@@ -45,7 +45,6 @@ import org.mybatis.generator.linitly.constant.JavaConstantGenerator;
 import org.mybatis.generator.linitly.controller.JavaControllerGenerator;
 import org.mybatis.generator.linitly.dto.JavaModelDtoGenerator;
 import org.mybatis.generator.linitly.service.JavaServiceGenerator;
-import org.mybatis.generator.linitly.vo.JavaModelVoGenerator;
 
 /**
  * Introspected table implementation for generating MyBatis3 artifacts.

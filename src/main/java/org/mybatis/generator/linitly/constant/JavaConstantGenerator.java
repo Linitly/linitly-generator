@@ -65,11 +65,11 @@ public class JavaConstantGenerator extends AbstractJavaGenerator {
     }
 
     private Field getMaxRangeTipField(IntrospectedColumn column) {
-        return new Field(CommonUtil.getRangeErrorConstant(column), FullyQualifiedJavaType.getIntInstance(), column.getRemarks() + ValidConstant.RANGE_ERROR_TIP_SUFFIX);
+        return new Field(CommonUtil.getRangeErrorConstant(column), FullyQualifiedJavaType.getStringInstance(), "\"" + column.getRemarks() + ValidConstant.RANGE_ERROR_TIP_SUFFIX + "\"");
     }
 
     private Field getSizeTipField(IntrospectedColumn column) {
-        return new Field(CommonUtil.getSizeErrorConstant(column), FullyQualifiedJavaType.getStringInstance(), column.getRemarks() + ValidConstant.SIZE_ERROR_TIP_SUFFIX);
+        return new Field(CommonUtil.getSizeErrorConstant(column), FullyQualifiedJavaType.getStringInstance(), "\"" + column.getRemarks() + ValidConstant.SIZE_ERROR_TIP_SUFFIX + "\"");
     }
 
     private Field getSizeField(IntrospectedColumn column) {
@@ -78,6 +78,6 @@ public class JavaConstantGenerator extends AbstractJavaGenerator {
 
     private Field getNotEmptyTipField(IntrospectedColumn column) {
 
-        return new Field(CommonUtil.getNotEmptyConstant(column), FullyQualifiedJavaType.getStringInstance(), column.getRemarks() + ValidConstant.EMPTY_ERROR_TIP_SUFFIX);
+        return new Field(CommonUtil.getNotEmptyConstant(column), FullyQualifiedJavaType.getStringInstance(), "\"" + column.getRemarks() + ValidConstant.EMPTY_ERROR_TIP_SUFFIX + "\"");
     }
 }

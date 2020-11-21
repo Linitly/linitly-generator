@@ -164,7 +164,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
         method.addAnnotation(ControllerConstant.POST_MAPPING + "(\"/" + introspectedTable.getUpdateByPrimaryKeyStatementId() + "\")");
         method.addAnnotation(SwaggerConstant.API_OPERATION + "(value = \"" + CSEnum.UPDATE.getCnPrefix() + table.getRemark() + "\")");
 
-        Parameter parameter = new Parameter(new FullyQualifiedJavaType(table.getDomainObjectName()), CommonUtil.lowerFirst(table.getDomainObjectName()));
+        Parameter parameter = CommonUtil.getModelDtoParameter(introspectedTable);
         parameter.addAnnotation(ControllerConstant.REQUEST_BODY);
         parameter.addAnnotation(ValidConstant.VALIDATED + "({" + ControllerConstant.UPDATE_VALID_GROUP_CLASS + "})");
         method.addParameter(0, parameter);
@@ -178,7 +178,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
         sb.append(".");
         sb.append(introspectedTable.getUpdateByPrimaryKeyStatementId());
         sb.append("(");
-        sb.append(CommonUtil.lowerFirst(table.getDomainObjectName()));
+        sb.append(CommonConstant.DTO_NAME);
         sb.append(");");
         method.addBodyLine(sb.toString());
 
@@ -191,7 +191,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
         method.addAnnotation(ControllerConstant.POST_MAPPING + "(\"/" + introspectedTable.getInsertStatementId() + "\")");
         method.addAnnotation(SwaggerConstant.API_OPERATION + "(value = \"" + CSEnum.INSERT.getCnPrefix() + table.getRemark() + "\")");
 
-        Parameter parameter = new Parameter(new FullyQualifiedJavaType(table.getDomainObjectName()), CommonUtil.lowerFirst(table.getDomainObjectName()));
+        Parameter parameter = CommonUtil.getModelDtoParameter(introspectedTable);
         parameter.addAnnotation(ControllerConstant.REQUEST_BODY);
         parameter.addAnnotation(ValidConstant.VALIDATED + "({" + ControllerConstant.INSERT_VALID_GROUP_CLASS + "})");
         method.addParameter(0, parameter);
@@ -205,7 +205,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
         sb.append(".");
         sb.append(introspectedTable.getInsertStatementId());
         sb.append("(");
-        sb.append(CommonUtil.lowerFirst(table.getDomainObjectName()));
+        sb.append(CommonConstant.DTO_NAME);
         sb.append(");");
         method.addBodyLine(sb.toString());
 
@@ -241,6 +241,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
         importedTypes.add(new FullyQualifiedJavaType(ControllerConstant.ADMIN_COMMON_CONSTANT_IMPORT));
         importedTypes.add(new FullyQualifiedJavaType(ValidConstant.VALIDATED_IMPORT));
         importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getJavaServiceType()));
+        importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getJavaModelDtoType()));
         importedTypes.add(new FullyQualifiedJavaType(introspectedTable.getBaseRecordType()));
         importedTypes.add(FullyQualifiedJavaType.getNewListInstance());
         topLevelClass.addImportedTypes(importedTypes);
