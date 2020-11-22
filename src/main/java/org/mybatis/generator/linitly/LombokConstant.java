@@ -2,7 +2,7 @@ package org.mybatis.generator.linitly;
 
 public interface LombokConstant {
 
-    String[] IMPORTS = {"lombok.Data"};
+    String[] IMPORTS = {"lombok.Data", "lombok.experimental.Accessors"};
 
-    String[] ANNOTATIONS = {"@Data"};
+    String[] ANNOTATIONS = {"@Data", "@Accessors(chain = true)"};
 }
