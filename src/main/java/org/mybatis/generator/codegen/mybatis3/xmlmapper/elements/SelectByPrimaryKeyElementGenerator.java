@@ -64,13 +64,13 @@ public class SelectByPrimaryKeyElementGenerator extends
         context.getCommentGenerator().addComment(answer);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("select "); //$NON-NLS-1$
+        sb.append("SELECT "); //$NON-NLS-1$
 
         if (stringHasValue(introspectedTable
                 .getSelectByPrimaryKeyQueryId())) {
             sb.append('\'');
             sb.append(introspectedTable.getSelectByPrimaryKeyQueryId());
-            sb.append("' as QUERYID,"); //$NON-NLS-1$
+            sb.append("' AS QUERYID,"); //$NON-NLS-1$
         }
         answer.addElement(new TextElement(sb.toString()));
         answer.addElement(getBaseColumnListElement());
@@ -80,7 +80,7 @@ public class SelectByPrimaryKeyElementGenerator extends
         }
 
         sb.setLength(0);
-        sb.append("from "); //$NON-NLS-1$
+        sb.append("FROM "); //$NON-NLS-1$
         sb.append(introspectedTable
                 .getAliasedFullyQualifiedTableNameAtRuntime());
         answer.addElement(new TextElement(sb.toString()));
@@ -90,9 +90,9 @@ public class SelectByPrimaryKeyElementGenerator extends
                 .getPrimaryKeyColumns()) {
             sb.setLength(0);
             if (and) {
-                sb.append("  and "); //$NON-NLS-1$
+                sb.append("  AND "); //$NON-NLS-1$
             } else {
-                sb.append("where "); //$NON-NLS-1$
+                sb.append("WHERE "); //$NON-NLS-1$
                 and = true;
             }
 

@@ -56,7 +56,7 @@ public class DeleteByPrimaryKeyElementGenerator extends
         context.getCommentGenerator().addComment(answer);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("delete from "); //$NON-NLS-1$
+        sb.append("DELETE FROM "); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
         answer.addElement(new TextElement(sb.toString()));
 
@@ -65,9 +65,9 @@ public class DeleteByPrimaryKeyElementGenerator extends
                 .getPrimaryKeyColumns()) {
             sb.setLength(0);
             if (and) {
-                sb.append("  and "); //$NON-NLS-1$
+                sb.append("  AND "); //$NON-NLS-1$
             } else {
-                sb.append("where "); //$NON-NLS-1$
+                sb.append("WHERE "); //$NON-NLS-1$
                 and = true;
             }
 

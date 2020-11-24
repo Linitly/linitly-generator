@@ -48,12 +48,12 @@ public class FindAllElementGenerator extends AbstractXmlElementGenerator {
         context.getCommentGenerator().addComment(answer);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("select "); //$NON-NLS-1$
+        sb.append("SELECT "); //$NON-NLS-1$
         answer.addElement(new TextElement(sb.toString()));
         answer.addElement(getBaseColumnListElement());
 
         sb.setLength(0);
-        sb.append("from "); //$NON-NLS-1$
+        sb.append("FROM "); //$NON-NLS-1$
         sb.append(introspectedTable
                 .getAliasedFullyQualifiedTableNameAtRuntime());
         answer.addElement(new TextElement(sb.toString()));
@@ -68,7 +68,7 @@ public class FindAllElementGenerator extends AbstractXmlElementGenerator {
             sb.append(introspectedColumn.getJavaProperty());
             sb.append(" != null");
             if (introspectedColumn.getJdbcTypeName().equals("BLOB") || introspectedColumn.getJdbcTypeName().equals("VARCHAR")) {
-                sb.append(" and ").append(introspectedColumn.getJavaProperty()).append(" != ''");
+                sb.append(" AND ").append(introspectedColumn.getJavaProperty()).append(" != ''");
             }
             XmlElement isNotNullElement = new XmlElement("if"); //$NON-NLS-1$
             isNotNullElement.addAttribute(new Attribute("test", sb.toString())); //$NON-NLS-1$
@@ -78,7 +78,7 @@ public class FindAllElementGenerator extends AbstractXmlElementGenerator {
             if (firstColumn) {
                 firstColumn = false;
             } else {
-                sb.append("and ");
+                sb.append("AND ");
             }
             sb.append(MyBatis3FormattingUtilities.getEscapedColumnName(introspectedColumn));
             if (introspectedColumn.getJdbcTypeName().equals("BLOB") || introspectedColumn.getJdbcTypeName().equals("VARCHAR")) {
