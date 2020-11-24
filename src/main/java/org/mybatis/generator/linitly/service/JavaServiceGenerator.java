@@ -193,7 +193,7 @@ public class JavaServiceGenerator extends AbstractJavaGenerator {
         sb.append(ServiceConstant.BEAN_UTILS);
         sb.append(".copyProperties(");
         sb.append(dtoName);
-        sb.append("， ");
+        sb.append(", ");
         sb.append(modelName);
         sb.append(");");
         method.addBodyLine(sb.toString());

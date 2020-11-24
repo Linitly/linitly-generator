@@ -18,7 +18,7 @@ public interface CommonConstant {
 
     SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    String MODEL_CLASS_PACKAGE = CommonConstant.BUSINESS_PACKAGE + ".helper.entity";
+    String MODEL_CLASS_PACKAGE = CommonConstant.BASE_PACKAGE + ".helper.entity";
 
     String DTO_NAME = "dto";
 }
