@@ -9,6 +9,8 @@ import org.mybatis.generator.codegen.mybatis3.ListUtilities;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 import org.mybatis.generator.codegen.mybatis3.xmlmapper.elements.AbstractXmlElementGenerator;
 
+import java.util.List;
+
 public class FindAllElementGenerator extends AbstractXmlElementGenerator {
 
     private boolean isSimple;
@@ -62,8 +64,12 @@ public class FindAllElementGenerator extends AbstractXmlElementGenerator {
         answer.addElement(dynamicElement);
 
         boolean firstColumn = true;
-        for (IntrospectedColumn introspectedColumn :
-                ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getAllColumns())) {
+
+        List<IntrospectedColumn> columns = ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getAllColumns());
+        columns = ListUtilities.removeFindAllColumns(columns);
+
+
+        for (IntrospectedColumn introspectedColumn : columns) {
             sb.setLength(0);
             sb.append(introspectedColumn.getJavaProperty());
             sb.append(" != null");

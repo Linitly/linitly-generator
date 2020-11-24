@@ -16,6 +16,7 @@
 package org.mybatis.generator.codegen.mybatis3.xmlmapper.elements;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.OutputUtilities;
@@ -55,12 +56,18 @@ public class UpdateByPrimaryKeyWithoutBLOBsElementGenerator extends
         sb.setLength(0);
         sb.append("SET "); //$NON-NLS-1$
 
-        Iterator<IntrospectedColumn> iter;
+        List<IntrospectedColumn> columns = null;
+
+
         if (isSimple) {
-            iter = ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getNonPrimaryKeyColumns()).iterator();
+            columns = ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getNonPrimaryKeyColumns());
         } else {
-            iter = ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getBaseColumns()).iterator();
+            columns = ListUtilities.removeGeneratedAlwaysColumns(introspectedTable.getBaseColumns());
         }
+
+        columns = ListUtilities.removeUpdateColumns(columns);
+
+        Iterator<IntrospectedColumn> iter = columns.iterator();
         while (iter.hasNext()) {
             IntrospectedColumn introspectedColumn = iter.next();
 

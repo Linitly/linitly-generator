@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.mybatis.generator.api.IntrospectedColumn;
+import org.mybatis.generator.linitly.ModelSuperClassConstant;
 
 /**
  * Couple of little utility methods to make dealing with generated always
@@ -43,6 +44,34 @@ public class ListUtilities {
     public static List<IntrospectedColumn> removeIdentityAndGeneratedAlwaysColumns(List<IntrospectedColumn> columns) {
         return columns.stream()
                 .filter(ic -> !ic.isGeneratedAlways() && !ic.isIdentity())
+                .collect(Collectors.toList());
+    }
+
+    public static List<IntrospectedColumn> removeInsertColumns(List<IntrospectedColumn> columns) {
+        return columns.stream()
+                .filter(e -> !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[2]) &&
+                        !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[4]) &&
+                        !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[5]))
+                .collect(Collectors.toList());
+    }
+
+    public static List<IntrospectedColumn> removeUpdateColumns(List<IntrospectedColumn> columns) {
+        return columns.stream()
+                .filter(e -> !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[2]) &&
+                        !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[4]) &&
+                        !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[5]) &&
+                        !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[1])
+                        )
+                .collect(Collectors.toList());
+    }
+
+    public static List<IntrospectedColumn> removeFindAllColumns(List<IntrospectedColumn> columns) {
+        return columns.stream()
+                .filter(e -> !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[0]) &&
+                        !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[1]) &&
+                        !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[3]) &&
+                        !e.getActualColumnName().equals(ModelSuperClassConstant.FIELD_NAME[4])
+                )
                 .collect(Collectors.toList());
     }
 }

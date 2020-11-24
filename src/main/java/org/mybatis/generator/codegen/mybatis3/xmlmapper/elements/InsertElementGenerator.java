@@ -89,6 +89,7 @@ public class InsertElementGenerator extends AbstractXmlElementGenerator {
         List<String> valuesClauses = new ArrayList<>();
         List<IntrospectedColumn> columns =
                 ListUtilities.removeIdentityAndGeneratedAlwaysColumns(introspectedTable.getAllColumns());
+        columns = ListUtilities.removeInsertColumns(columns);
         for (int i = 0; i < columns.size(); i++) {
             IntrospectedColumn introspectedColumn = columns.get(i);
 
