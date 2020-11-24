@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -420,12 +421,12 @@ public class MyBatisGenerator {
      */
     private void writeFile(File file, String content, String fileEncoding) throws IOException {
         FileOutputStream fos = new FileOutputStream(file, false);
-        OutputStreamWriter osw;
-        if (fileEncoding == null) {
-            osw = new OutputStreamWriter(fos);
-        } else {
-            osw = new OutputStreamWriter(fos, fileEncoding);
-        }
+        OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+//        if (fileEncoding == null) {
+//            osw = new OutputStreamWriter(fos);
+//        } else {
+//            osw = new OutputStreamWriter(fos, fileEncoding);
+//        }
 
         try (BufferedWriter bw = new BufferedWriter(osw)) {
             bw.write(content);
