@@ -57,6 +57,7 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
 
         Method method = new Method(introspectedTable.getSelectAllStatementId());
         method.setVisibility(JavaVisibility.PUBLIC);
+        method.addAnnotation(ControllerConstant.PAGINATION);
         method.addAnnotation(ControllerConstant.POST_MAPPING + "(\"/" + introspectedTable.getSelectAllStatementId() + "\")");
         method.addAnnotation(SwaggerConstant.API_OPERATION + "(value = \"" + CSEnum.FIND_ALL.getCnPrefix() + table.getRemark() + CSEnum.FIND_ALL.getCnSuffix() + "\")");
 
@@ -110,7 +111,6 @@ public class JavaControllerGenerator extends AbstractJavaGenerator {
 
         Method method = new Method(introspectedTable.getSelectByPrimaryKeyStatementId());
         method.setVisibility(JavaVisibility.PUBLIC);
-        method.addAnnotation(ControllerConstant.PAGINATION);
         method.addAnnotation(ControllerConstant.POST_MAPPING + "(\"/" + introspectedTable.getSelectByPrimaryKeyStatementId() + "/{" + primaryKeyColumn.getJavaProperty() + "}\")");
         method.addAnnotation(SwaggerConstant.API_OPERATION + "(value = \"" + CSEnum.FIND_BY_ID.getCnPrefix() + table.getRemark() + "\")");
 
