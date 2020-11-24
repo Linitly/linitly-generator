@@ -74,7 +74,7 @@ public class FindAllElementGenerator extends AbstractXmlElementGenerator {
             sb.append(introspectedColumn.getJavaProperty());
             sb.append(" != null");
             if (introspectedColumn.getJdbcTypeName().equals("BLOB") || introspectedColumn.getJdbcTypeName().equals("VARCHAR")) {
-                sb.append(" AND ").append(introspectedColumn.getJavaProperty()).append(" != ''");
+                sb.append(" and ").append(introspectedColumn.getJavaProperty()).append(" != ''");
             }
             XmlElement isNotNullElement = new XmlElement("if"); //$NON-NLS-1$
             isNotNullElement.addAttribute(new Attribute("test", sb.toString())); //$NON-NLS-1$

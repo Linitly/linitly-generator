@@ -64,10 +64,8 @@ public class SelectAllMethodGenerator extends AbstractJavaMapperMethodGenerator 
         }
 
         Parameter parameter = new Parameter(parameterType, CommonUtil.lowerFirst(parameterType.getShortName()));
-        parameter.addAnnotation(MapperConstant.PARAM_ANNOTATION + "(\"" + CommonUtil.lowerFirst(parameterType.getShortName()) + "\")");
 
         method.addParameter(parameter); //$NON-NLS-1$
-        importedTypes.add(new FullyQualifiedJavaType(MapperConstant.PARAM_IMPORT));
 
         returnType.addTypeArgument(listType);
         method.setReturnType(returnType);
