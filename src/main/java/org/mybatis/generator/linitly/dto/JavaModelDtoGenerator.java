@@ -93,6 +93,8 @@ public class JavaModelDtoGenerator extends AbstractJavaGenerator {
         sb.append(constantName);
         sb.append(".");
         sb.append(CommonUtil.getNotEmptyConstant(column));
+        sb.append(", groups = ");
+        sb.append(CommonUtil.appendGroups());
         sb.append(")");
         return sb.toString();
     }
