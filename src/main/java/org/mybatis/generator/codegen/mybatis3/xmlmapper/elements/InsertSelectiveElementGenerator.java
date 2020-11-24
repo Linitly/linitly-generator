@@ -65,7 +65,7 @@ public class InsertSelectiveElementGenerator extends
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("insert into "); //$NON-NLS-1$
+        sb.append("INSERT INTO "); //$NON-NLS-1$
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
         answer.addElement(new TextElement(sb.toString()));
 
