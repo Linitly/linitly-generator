@@ -134,7 +134,7 @@ public class JavaServiceGenerator extends AbstractJavaGenerator {
 
         sb.append(CommonUtil.lowerFirst(new FullyQualifiedJavaType(introspectedTable.getMyBatis3JavaMapperType()).getShortName()));
         sb.append(".");
-        sb.append(introspectedTable.getUpdateByPrimaryKeyStatementId());
+        sb.append(introspectedTable.getUpdateByPrimaryKeySelectiveStatementId());
         sb.append("(");
         sb.append(CommonUtil.lowerFirst(table.getDomainObjectName()));
         sb.append(");");
@@ -157,7 +157,7 @@ public class JavaServiceGenerator extends AbstractJavaGenerator {
 
         sb.append(CommonUtil.lowerFirst(new FullyQualifiedJavaType(introspectedTable.getMyBatis3JavaMapperType()).getShortName()));
         sb.append(".");
-        sb.append(introspectedTable.getInsertStatementId());
+        sb.append(introspectedTable.getInsertSelectiveStatementId());
         sb.append("(");
         sb.append(CommonUtil.lowerFirst(table.getDomainObjectName()));
         sb.append(");");

@@ -24,6 +24,8 @@ import org.mybatis.generator.codegen.mybatis3.ListUtilities;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 import org.mybatis.generator.config.GeneratedKey;
 
+import java.util.List;
+
 public class InsertSelectiveElementGenerator extends
         AbstractXmlElementGenerator {
 
@@ -81,8 +83,11 @@ public class InsertSelectiveElementGenerator extends
         valuesTrimElement.addAttribute(new Attribute("suffixOverrides", ",")); //$NON-NLS-1$ //$NON-NLS-2$
         answer.addElement(valuesTrimElement);
 
-        for (IntrospectedColumn introspectedColumn :
-                ListUtilities.removeIdentityAndGeneratedAlwaysColumns(introspectedTable.getAllColumns())) {
+        List<IntrospectedColumn> columns =
+                ListUtilities.removeIdentityAndGeneratedAlwaysColumns(introspectedTable.getAllColumns());
+        columns = ListUtilities.removeInsertColumns(columns);
+
+        for (IntrospectedColumn introspectedColumn : columns) {
 
             if (introspectedColumn.isSequenceColumn()
                     || introspectedColumn.getFullyQualifiedJavaType().isPrimitive()) {

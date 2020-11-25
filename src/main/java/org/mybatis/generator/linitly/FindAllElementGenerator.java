@@ -88,7 +88,7 @@ public class FindAllElementGenerator extends AbstractXmlElementGenerator {
             }
             sb.append(MyBatis3FormattingUtilities.getEscapedColumnName(introspectedColumn));
             if (introspectedColumn.getJdbcTypeName().equals("BLOB") || introspectedColumn.getJdbcTypeName().equals("VARCHAR")) {
-                sb.append(" LIKE CONCAT('%' ").append(MyBatis3FormattingUtilities.getParameterClause(introspectedColumn)).append(", '%')");
+                sb.append(" LIKE CONCAT('%', ").append(MyBatis3FormattingUtilities.getParameterClause(introspectedColumn)).append(", '%')");
             } else {
                 sb.append(" = "); //$NON-NLS-1$
                 sb.append(MyBatis3FormattingUtilities.getParameterClause(introspectedColumn));
