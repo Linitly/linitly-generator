@@ -87,6 +87,7 @@ public class ElementRenderer implements ElementVisitor<Stream<String>> {
         return Stream.of("</" //$NON-NLS-1$
                 + element.getName()
                 + ">"
-                + (element.getName().equals("if") || element.getName().equals("where") ? "" : "\n")); //$NON-NLS-1$
+                + (element.getName().equals("if") || element.getName().equals("where") ||  element.getName().equals("trim") || element.getName().equals("set")
+                ? "" : "\n")); //$NON-NLS-1$
     }
 }

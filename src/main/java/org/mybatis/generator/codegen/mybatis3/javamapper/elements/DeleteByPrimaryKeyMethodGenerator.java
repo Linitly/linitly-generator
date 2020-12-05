@@ -25,6 +25,7 @@ import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
+import org.mybatis.generator.linitly.MapperConstant;
 
 public class DeleteByPrimaryKeyMethodGenerator extends
         AbstractJavaMapperMethodGenerator {
@@ -43,6 +44,9 @@ public class DeleteByPrimaryKeyMethodGenerator extends
         method.setVisibility(JavaVisibility.PUBLIC);
         method.setAbstract(true);
         method.setReturnType(FullyQualifiedJavaType.getIntInstance());
+
+        method.addAnnotation(MapperConstant.DELETE_BACKUP_ANNOTATION);
+        importedTypes.add(new FullyQualifiedJavaType(MapperConstant.DELETE_BACKUP_IMPORT));
 
         if (!isSimple && introspectedTable.getRules().generatePrimaryKeyClass()) {
             FullyQualifiedJavaType type = new FullyQualifiedJavaType(
